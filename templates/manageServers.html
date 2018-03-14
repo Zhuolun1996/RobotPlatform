@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+    {% for item in usingHosts %}
+        <h3>{{ item }}</h3>
+        {#        <a href="/createUserRequest/{{ item.hostName }}/">创建用户</a>#}
+        <a href="/deleteUserRequest/{{ item }}/">删除用户</a>
+    {% endfor %}
+    {% for item in notUsingHosts %}
+        <h3>{{ item }}</h3>
+        <a href="/createUserRequest/{{ item }}/">创建用户</a>
+        {#        <a href="/deleteUserRequest/{{ item.hostName }}/">删除用户</a>#}
+    {% endfor %}
+    <p>
+        <a href="/modify/">modify user data</a>
+    </p>
+    <p>
+        <a href="/createUserRequest/">request create user</a>
+    </p>
+{% endblock %}

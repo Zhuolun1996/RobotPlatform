@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- gateone.html -->
+<!-- body的内容-->
+<script type="text/javascript" src="https://127.0.0.1/static/gateone.js"></script>
+<div id="gateone_container" style="position: relative; width: 100%; height: 50em;margin: 0 auto">
+
+    <div id="gateone"></div>
+
+</div>
+
+<script
+        src="http://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+
+<!-- 需要用gateone.js 和jquery.js。-->
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var ip = '{{ host_ip }}';
+        var user = '{{ host_user }}';
+        var port = {{ host_port }};
+        console.log(ip);
+        console.log(user);
+        console.log(port);
+        var ssh_url = 'ssh://' + user + '@' + ip + ':' + port;
+        <!--去请求认证信息-->
+        var request = $.ajax({
+            url: '{% url "getAuthObj" %}',   // api认证方式，
+            type: "GET",
+            dataType: "json"
+        });
+
+        <!--根据认证信息去连接websocket -->
+        request.done(function (auth_info) {
+            var auth_message = auth_info.auth;
+            var auth_url = auth_info.url;
+            GateOne.init({
+                auth: auth_message,
+                url: auth_url,
+                theme: 'black',
+                goDiv: '#gateone',
+                autoConnectURL: ssh_url
+            });
+
+        });
+        GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal"], function (window, undefined) {
+
+            var location = user;
+            GateOne.prefs.autoConnectURL = ssh_url;
+            GateOne.Net.setLocation(location);
+            <!--记录登录状态-->
+
+        });
+
+
+    });
+
+
+</script>
+</body>
+</html>
