@@ -7,6 +7,15 @@ import time, hmac, hashlib, json, socket
 from .forms import profileForm, loginForm, userForm
 from django.contrib.auth.models import User
 from ast import literal_eval
+from .socketConnect import establishContainerConnect, establishRobotConnect, sendRequest
+from Robot.settings import CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_PORT, ROBOT_TARGET_SERVER_IP, \
+    ROBOT_TARGET_SERVER_PORT
+
+try:
+    containerSock = establishContainerConnect(CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_PORT)
+    robotSock = establishRobotConnect(ROBOT_TARGET_SERVER_IP, ROBOT_TARGET_SERVER_PORT)
+except:
+    print('Connection Refused')
 
 
 # Create your views here.
@@ -53,61 +62,57 @@ def getAuthObj(request):
 
 
 def createUserRequest(request, serverName):
-    def sendRequest(ip, port, message):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(5.0)
-        sock.connect((ip, port))
-        print(message.encode('utf-8'))
-        sock.sendall(message.encode('utf-8'))
-        sock.close()
-
     _server = server.objects.get(hostName=serverName)
-    serverIP = _server.hostIP
     serverPort = _server.hostPort
     userName = request.user.username
-    port = 48000
     data = {'createcuser':
                 {'port': int(serverPort),
                  'username': userName}}
     jsonData = json.dumps(data)
-    # sendRequest(serverIP, port, jsonData)
-    _user = request.user
-    _serverNum = _user.profile.serverNum
-    _serverNum = literal_eval(_serverNum)
-    newServers = set(_serverNum)
-    newServers.add(serverName)
-    _user.profile.serverNum = str(list(newServers))
-    _user.save()
-    return redirect('/')
+    try:
+        receivingMessage = sendRequest(containerSock, jsonData)
+    except socket.timeout:
+        return HttpResponse('timeout')
+    if receivingMessage['createcuser']['response'] == 'ok':
+        _user = request.user
+        _serverNum = _user.profile.serverNum
+        _serverNum = literal_eval(_serverNum)
+        newServers = set(_serverNum)
+        newServers.add(serverName)
+        _user.profile.serverNum = str(list(newServers))
+        _user.save()
+        return redirect('/')
+    elif receivingMessage['createcuser']['response'] == 'fail':
+        return HttpResponse('失败')
+    else:
+        raise Http404
 
 
 def deleteUserRequest(request, serverName):
-    def sendRequest(ip, port, message):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(5.0)
-        sock.connect((ip, port))
-        print(message.encode('utf-8'))
-        sock.sendall(message.encode('utf-8'))
-        sock.close()
-
     _server = server.objects.get(hostName=serverName)
-    serverIP = _server.hostIP
     serverPort = _server.hostPort
     userName = request.user.username
-    port = 48000
     data = {'deletecuser':
-                {'port': '%s' % serverPort,
+                {'port': int(serverPort),
                  'username': '%s' % userName}}
     jsonData = json.dumps(data)
-    # sendRequest(serverIP, port, jsonData)
-    _user = request.user
-    _serverNum = _user.profile.serverNum
-    _serverNum = literal_eval(_serverNum)
-    newServers = set(_serverNum)
-    newServers.remove(serverName)
-    _user.profile.serverNum = str(list(newServers))
-    _user.save()
-    return redirect('/')
+    try:
+        receivingMessage = sendRequest(containerSock, jsonData)
+    except socket.timeout:
+        return HttpResponse('timeout')
+    if receivingMessage['deletecuser']['response'] == 'ok':
+        _user = request.user
+        _serverNum = _user.profile.serverNum
+        _serverNum = literal_eval(_serverNum)
+        newServers = set(_serverNum)
+        newServers.remove(serverName)
+        _user.profile.serverNum = str(list(newServers))
+        _user.save()
+        return redirect('/')
+    elif receivingMessage['deletecuser']['response'] == 'fail':
+        return HttpResponse('失败')
+    else:
+        raise Http404
 
 
 def mainPage(request):
@@ -203,20 +208,39 @@ def manageServers(request):
 
 @login_required(login_url="/login/")
 def connectRobot(request):
-    def sendRequest(ip, port, message):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(5.0)
-        sock.connect((ip, port))
-        print(message.encode('utf-8'))
-        sock.sendall(message.encode('utf-8'))
-        receivingMessage = sock.recv(1024)
-        print(receivingMessage)
-        sock.close()
-
-    serverIP = '222.200.177.38'
-    port = 48100
     data = {'linkrobot':
                 {'username': 'stu'}}
     jsonData = json.dumps(data)
-    sendRequest(serverIP, port, jsonData)
-    return redirect('/')
+    try:
+        receivingMessage = sendRequest(robotSock, jsonData)
+    except socket.timeout:
+        return HttpResponse('timeout')
+    if receivingMessage['linkrobot']['response'] == 'ok':
+        robotIP = receivingMessage['linkrobot']['robotip']
+        robotPort = receivingMessage['linkrobot']['robotport']
+        robotNo = receivingMessage['linkrobot']['robotno']
+        print(robotIP,robotPort,robotNo)
+        return render(request, 'gateoneRobot.html', {'host_ip': ROBOT_TARGET_SERVER_IP, 'host_user': 'stu', 'host_port': robotPort,'robotNo':robotNo})
+    elif receivingMessage['linkrobot']['response'] == 'fail':
+        return HttpResponse(receivingMessage['linkrobot']['reason'])
+    else:
+        raise Http404
+
+
+@login_required(login_url="/login/")
+def disconnectRobot(request,_robotNo):
+    data = {'unlinkrobot':
+                {'robotno':_robotNo}}
+    jsonData = json.dumps(data)
+    try:
+        receivingMessage = sendRequest(robotSock, jsonData)
+    except socket.timeout:
+        return HttpResponse('timeout')
+    if receivingMessage['unlinkrobot']['response'] == 'ok':
+        robotNo = receivingMessage['unlinkrobot']['robotno']
+        print(robotNo)
+        return HttpResponse('released robot')
+    elif receivingMessage['unlinkrobot']['response'] == 'fail':
+        return HttpResponse(receivingMessage['unlinkrobot']['reason'])
+    else:
+        raise Http404
