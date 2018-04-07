@@ -1,5 +1,5 @@
 from django import forms
-from .models import profile
+from .models import profile, uploadFile
 from django.contrib.auth.models import User
 
 
@@ -8,10 +8,12 @@ class profileForm(forms.ModelForm):
         model = profile
         fields = ['serverNum']
 
+
 class userForm(forms.ModelForm):
     class Meta:
         model = User
-        fields= ['username', 'password']
+        fields = ['username', 'password']
+
 
 class loginForm(forms.Form):
     username = forms.CharField(required=True, label=u'username', error_messages={'required': 'username is required'},
@@ -24,3 +26,9 @@ class loginForm(forms.Form):
             raise forms.ValidationError(u"username and password are required")
         else:
             cleaned_data = super(loginForm, self).clean()
+
+
+class uploadFileForm(forms.ModelForm):
+    class Meta:
+        model = uploadFile
+        fields = ('file',)

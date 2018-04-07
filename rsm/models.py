@@ -34,3 +34,23 @@ class profile(models.Model):
 
 class course(models.Model):
     courseName = models.CharField(max_length=100, null=False, primary_key=True)
+
+
+def upload_to(instance, filename):
+    return 'files/%s/%s' % (instance.belongTo.username, filename)
+
+
+class uploadFile(models.Model):
+    belongTo = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    file = models.FileField(upload_to=upload_to, default='default.txt',null=False)
+
+    def __str__(self):
+        return self.file.name
+
+    def getFilePath(self):
+        tempFileName=self.file.path.replace('/','+')
+        tempFileName=tempFileName.replace(' ','=')
+        return tempFileName
+
+    def getFileName(self):
+        return self.file.name.split('/')[-1]

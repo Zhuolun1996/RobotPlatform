@@ -2,20 +2,22 @@ from django.shortcuts import render, redirect, Http404, HttpResponse
 from django.contrib.auth.decorators import permission_required
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from .models import server, profile
+from .models import server, profile, uploadFile
 import time, hmac, hashlib, json, socket
-from .forms import profileForm, loginForm, userForm
+from .forms import profileForm, loginForm, userForm, uploadFileForm
 from django.contrib.auth.models import User
 from ast import literal_eval
 from .socketConnect import establishContainerConnect, establishRobotConnect, sendRequest
 from Robot.settings import CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_PORT, ROBOT_TARGET_SERVER_IP, \
     ROBOT_TARGET_SERVER_PORT
+from django.http import FileResponse
 
-try:
-    containerSock = establishContainerConnect(CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_PORT)
-    robotSock = establishRobotConnect(ROBOT_TARGET_SERVER_IP, ROBOT_TARGET_SERVER_PORT)
-except:
-    print('Connection Refused')
+
+# try:
+# containerSock = establishContainerConnect(CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_PORT)
+# robotSock = establishRobotConnect(ROBOT_TARGET_SERVER_IP, ROBOT_TARGET_SERVER_PORT)
+# except:
+#     print('Connection Refused')
 
 
 # Create your views here.
@@ -219,8 +221,10 @@ def connectRobot(request):
         robotIP = receivingMessage['linkrobot']['robotip']
         robotPort = receivingMessage['linkrobot']['robotport']
         robotNo = receivingMessage['linkrobot']['robotno']
-        print(robotIP,robotPort,robotNo)
-        return render(request, 'gateoneRobot.html', {'host_ip': ROBOT_TARGET_SERVER_IP, 'host_user': 'stu', 'host_port': robotPort,'robotNo':robotNo})
+        print(robotIP, robotPort, robotNo)
+        return render(request, 'gateoneRobot.html',
+                      {'host_ip': ROBOT_TARGET_SERVER_IP, 'host_user': 'stu', 'host_port': robotPort,
+                       'robotNo': robotNo})
     elif receivingMessage['linkrobot']['response'] == 'fail':
         return HttpResponse(receivingMessage['linkrobot']['reason'])
     else:
@@ -228,9 +232,9 @@ def connectRobot(request):
 
 
 @login_required(login_url="/login/")
-def disconnectRobot(request,_robotNo):
+def disconnectRobot(request, _robotNo):
     data = {'unlinkrobot':
-                {'robotno':_robotNo}}
+                {'robotno': _robotNo}}
     jsonData = json.dumps(data)
     try:
         receivingMessage = sendRequest(robotSock, jsonData)
@@ -244,3 +248,38 @@ def disconnectRobot(request,_robotNo):
         return HttpResponse(receivingMessage['unlinkrobot']['reason'])
     else:
         raise Http404
+
+
+@login_required(login_url="/login/")
+def uploadUserFile(request):
+    logStatus = request.user.is_authenticated
+    if request.method == 'POST':
+        _uploadFile = uploadFileForm(request.FILES)
+        if _uploadFile.is_valid():
+            _file = request.FILES.get('uploadFile')
+            userFile = uploadFile(belongTo=request.user, file=_file)
+            userFile.save()
+            return redirect('/')
+    else:
+        _uploadFile = uploadFileForm(request.FILES)
+    return render(request, 'uploadFilePage.html',
+                  {'uploadFileForm': _uploadFile, 'logStatus': logStatus})
+
+
+@login_required(login_url="/login/")
+def downloadUserFilePage(request):
+    logStatus = request.user.is_authenticated
+    userFiles = uploadFile.objects.filter(belongTo=request.user)
+    return render(request, 'downloadFilePage.html', {'userFiles': userFiles, 'logStatus': logStatus})
+
+
+@login_required(login_url="/login/")
+def downloadUserFile(request, filePath):
+    realFilePath=filePath.replace('+','/')
+    realFilePath=realFilePath.replace('=',' ')
+    filename=realFilePath.split('/')[-1]
+    file = open(realFilePath, 'rb')
+    response = FileResponse(file)
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="%s' % filename
+    return response

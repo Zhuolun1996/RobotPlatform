@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+    {% for item in userFiles %}
+        <p><a href="/downloadFile/{{ item.getFilePath }}">{{ item.getFileName }}</a></p>
+    {% endfor %}
+{% endblock %}
