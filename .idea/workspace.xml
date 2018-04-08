@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1f8858c-ba95-46c6-b7eb-c83032ad5605" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/rsm/views.py" afterPath="$PROJECT_DIR$/rsm/views.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/templates/gateone.html" afterPath="$PROJECT_DIR$/templates/gateone.html" />
+      <change beforePath="$PROJECT_DIR$/templates/gateoneRobot.html" afterPath="$PROJECT_DIR$/templates/gateoneRobot.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,14 +21,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rsm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="302" column="30" lean-forward="false" selection-start-line="302" selection-start-column="26" selection-end-line="302" selection-end-column="30" />
+            <state relative-caret-position="955">
+              <caret line="352" column="52" lean-forward="false" selection-start-line="352" selection-start-column="39" selection-end-line="352" selection-end-column="52" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gateone.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/gateone.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="58" column="12" lean-forward="false" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -41,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Robot/settings.py">
+      <file leaf-file-name="gateoneRobot.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/gateoneRobot.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="125" column="13" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="13" />
+            <state relative-caret-position="143">
+              <caret line="63" column="38" lean-forward="false" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -74,18 +86,8 @@
       <file leaf-file-name="socketConnect.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rsm/socketConnect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
+            <state relative-caret-position="203">
               <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="uploadFilePage.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/uploadFilePage.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -142,6 +144,7 @@
       <find>hostConnect</find>
       <find>127.0.0.1</find>
       <find>{% endblock %}</find>
+      <find>autoconnect</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -165,8 +168,6 @@
         <option value="$PROJECT_DIR$/templates/downloadFilePage.html" />
         <option value="$PROJECT_DIR$/Robot/settings.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
-        <option value="$PROJECT_DIR$/templates/gateoneRobot.html" />
-        <option value="$PROJECT_DIR$/templates/gateone.html" />
         <option value="$PROJECT_DIR$/rsm/socketConnect.py" />
         <option value="$PROJECT_DIR$/templates/uploadFilePage.html" />
         <option value="$PROJECT_DIR$/rsm/forms.py" />
@@ -174,6 +175,8 @@
         <option value="$PROJECT_DIR$/Robot/urls.py" />
         <option value="$PROJECT_DIR$/templates/welcomePage.html" />
         <option value="$PROJECT_DIR$/rsm/views.py" />
+        <option value="$PROJECT_DIR$/templates/gateone.html" />
+        <option value="$PROJECT_DIR$/templates/gateoneRobot.html" />
       </list>
     </option>
   </component>
@@ -554,22 +557,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/gateone.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="64" lean-forward="false" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/gateoneRobot.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="64" lean-forward="false" selection-start-line="15" selection-start-column="64" selection-end-line="15" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -676,7 +663,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rsm/socketConnect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
+        <state relative-caret-position="203">
           <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
           <folding />
         </state>
@@ -684,11 +671,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rsm/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="302" column="30" lean-forward="false" selection-start-line="302" selection-start-column="26" selection-end-line="302" selection-end-column="30" />
+        <state relative-caret-position="955">
+          <caret line="352" column="52" lean-forward="false" selection-start-line="352" selection-start-column="39" selection-end-line="352" selection-end-column="52" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/gateoneRobot.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="63" column="38" lean-forward="false" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/gateone.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="58" column="12" lean-forward="false" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
