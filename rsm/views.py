@@ -255,7 +255,7 @@ def uploadUserFile(request):
     for item in usingServers:
         tempList.append(server.objects.get(hostName=item))
     if request.method == 'POST':
-        _uploadFile = uploadFileForm(request.FILES, request.POST)
+        _uploadFile = uploadFileForm(request.POST, request.FILES)
         if _uploadFile.is_valid():
             _file = request.FILES.get('uploadFile')
             _targetContainer = request.POST.get('targetContainer')
