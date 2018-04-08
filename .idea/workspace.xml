@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1f8858c-ba95-46c6-b7eb-c83032ad5605" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/gateone.html" afterPath="$PROJECT_DIR$/templates/gateone.html" />
-      <change beforePath="$PROJECT_DIR$/templates/gateoneRobot.html" afterPath="$PROJECT_DIR$/templates/gateoneRobot.html" />
+      <change beforePath="$PROJECT_DIR$/rsm/views.py" afterPath="$PROJECT_DIR$/rsm/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rsm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="955">
-              <caret line="352" column="52" lean-forward="false" selection-start-line="352" selection-start-column="39" selection-end-line="352" selection-end-column="52" />
+            <state relative-caret-position="113">
+              <caret line="311" column="79" lean-forward="false" selection-start-line="311" selection-start-column="79" selection-end-line="311" selection-end-column="79" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
@@ -42,20 +41,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rsm/tests.py">
+      <file leaf-file-name="uploadFilePage.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/uploadFilePage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="150">
+              <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gateoneRobot.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gateoneRobot.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/gateoneRobot.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
+            <state relative-caret-position="194">
               <caret line="62" column="12" lean-forward="false" selection-start-line="62" selection-start-column="12" selection-end-line="63" selection-end-column="38" />
               <folding />
             </state>
@@ -173,9 +172,9 @@
         <option value="$PROJECT_DIR$/rsm/models.py" />
         <option value="$PROJECT_DIR$/Robot/urls.py" />
         <option value="$PROJECT_DIR$/templates/welcomePage.html" />
-        <option value="$PROJECT_DIR$/rsm/views.py" />
         <option value="$PROJECT_DIR$/templates/gateone.html" />
         <option value="$PROJECT_DIR$/templates/gateoneRobot.html" />
+        <option value="$PROJECT_DIR$/rsm/views.py" />
       </list>
     </option>
   </component>
@@ -242,6 +241,11 @@
               <item name="Robot" type="b2602c69:ProjectViewProjectNode" />
               <item name="Robot" type="462c0819:PsiDirectoryNode" />
               <item name="rsm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Robot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Robot" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Robot" type="b2602c69:ProjectViewProjectNode" />
@@ -604,14 +608,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/uploadFilePage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rsm/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -652,29 +648,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/welcomePage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rsm/socketConnect.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rsm/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="955">
-          <caret line="352" column="52" lean-forward="false" selection-start-line="352" selection-start-column="39" selection-end-line="352" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -688,9 +666,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/gateoneRobot.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
+        <state relative-caret-position="194">
           <caret line="62" column="12" lean-forward="false" selection-start-line="62" selection-start-column="12" selection-end-line="63" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/uploadFilePage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/welcomePage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rsm/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="311" column="79" lean-forward="false" selection-start-line="311" selection-start-column="79" selection-end-line="311" selection-end-column="79" />
+          <folding>
+            <element signature="e#0#68#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

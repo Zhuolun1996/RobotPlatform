@@ -309,7 +309,7 @@ def downloadUserFilePage(request):
             except socket.timeout:
                 return HttpResponse('timeout')
             if receivingMessage['cdownload']['response'] == 'ok':
-                _file = os.path.join(MEDIA_ROOT, 'files', request.user, _filename)
+                _file = os.path.join(MEDIA_ROOT, 'files', request.user.username, _filename)
                 _targetContainer = request.POST.get('targetContainer')
                 userFile = uploadFile()
                 userFile.belongTo = request.user
