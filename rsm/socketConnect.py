@@ -23,7 +23,7 @@ def sendRequest(sock,message):
     receivingMessageLength=int(receivingMessage[:startPos].decode('utf-8'))
     receivingMessage=receivingMessage[startPos:startPos+receivingMessageLength]
     print(receivingMessage)
-    receivingMessage = json.loads(receivingMessage)
+    receivingMessage = json.loads(receivingMessage.encode('utf-8'))
     print(receivingMessage)
     return receivingMessage
 
