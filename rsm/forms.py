@@ -31,7 +31,7 @@ class loginForm(forms.Form):
 class uploadFileForm(forms.ModelForm):
     class Meta:
         model = uploadFile
-        fields = ('file','targetContainer')
+        fields = ['file','targetContainer']
 
 class downloadFileForm(forms.ModelForm):
     filename=forms.CharField(required=True,label='filename')

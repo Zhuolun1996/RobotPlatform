@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1f8858c-ba95-46c6-b7eb-c83032ad5605" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/uploadFilePage.html" afterPath="$PROJECT_DIR$/templates/uploadFilePage.html" />
+      <change beforePath="$PROJECT_DIR$/rsm/forms.py" afterPath="$PROJECT_DIR$/rsm/forms.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,11 +22,31 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rsm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3417">
+            <state relative-caret-position="-3600">
               <caret line="16" column="31" lean-forward="true" selection-start-line="15" selection-start-column="32" selection-end-line="16" selection-end-column="31" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rsm/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="33" column="41" lean-forward="false" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rsm/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="45" column="19" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -41,7 +61,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="uploadFilePage.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="uploadFilePage.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/uploadFilePage.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
@@ -56,16 +76,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
               <caret line="34" column="20" lean-forward="false" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="loginPage.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/loginPage.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="96" lean-forward="false" selection-start-line="22" selection-start-column="94" selection-end-line="22" selection-end-column="96" />
               <folding />
             </state>
           </provider>
@@ -86,16 +96,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
               <caret line="9" column="58" lean-forward="false" selection-start-line="9" selection-start-column="58" selection-end-line="9" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="manageServers.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/manageServers.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -165,7 +165,6 @@
         <option value="$PROJECT_DIR$/Robot/urls.py" />
         <option value="$PROJECT_DIR$/rsm/models.py" />
         <option value="$PROJECT_DIR$/templates/downloadFilePage.html" />
-        <option value="$PROJECT_DIR$/rsm/forms.py" />
         <option value="$PROJECT_DIR$/templates/welcomePage.html" />
         <option value="$PROJECT_DIR$/Robot/settings.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
@@ -174,6 +173,7 @@
         <option value="$PROJECT_DIR$/rsm/views.py" />
         <option value="$PROJECT_DIR$/rsm/socketConnect.py" />
         <option value="$PROJECT_DIR$/templates/uploadFilePage.html" />
+        <option value="$PROJECT_DIR$/rsm/forms.py" />
       </list>
     </option>
   </component>
@@ -553,26 +553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rsm/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="60" lean-forward="false" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#24#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rsm/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="81" lean-forward="false" selection-start-line="45" selection-start-column="81" selection-end-line="45" selection-end-column="81" />
-          <folding>
-            <element signature="e#0#28#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rsm/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -676,9 +656,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/uploadFilePage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/rsm/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3417">
+        <state relative-caret-position="-3600">
           <caret line="16" column="31" lean-forward="true" selection-start-line="15" selection-start-column="32" selection-end-line="16" selection-end-column="31" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
@@ -686,10 +674,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/uploadFilePage.html">
+    <entry file="file://$PROJECT_DIR$/rsm/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+        <state relative-caret-position="162">
+          <caret line="45" column="19" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rsm/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="33" column="41" lean-forward="false" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
           <folding />
         </state>
       </provider>
