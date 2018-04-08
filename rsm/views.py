@@ -392,8 +392,9 @@ def makeControl(request):
                 return HttpResponse('fail')
             else:
                 return HttpResponse(receivingMessage)
-        else:
-            _profileForm = profileForm()
-            _commandForm = commandForm()
-        return render(request, 'makeControl.html',
-                      {'profileForm': _profileForm,'commandForm':_commandForm, 'tempList': tempList,'logStatus': logStatus})
+    else:
+        _profileForm = profileForm()
+        _commandForm = commandForm()
+    return render(request, 'makeControl.html',
+                  {'profileForm': _profileForm, 'commandForm': _commandForm, 'tempList': tempList,
+                   'logStatus': logStatus})
