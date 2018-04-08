@@ -279,7 +279,7 @@ def uploadUserFile(request):
             else:
                 return HttpResponse(receivingMessage)
     else:
-        _uploadFile = uploadFileForm(request.FILES, request.POST)
+        _uploadFile = uploadFileForm()
     return render(request, 'uploadFilePage.html',
                   {'uploadFileForm': _uploadFile, 'logStatus': logStatus, 'tempList': tempList})
 
@@ -322,7 +322,7 @@ def downloadUserFilePage(request):
             else:
                 return HttpResponse(receivingMessage)
     else:
-        _downloadFile = downloadFileForm(request.POST)
+        _downloadFile = downloadFileForm()
     return render(request, 'downloadFilePage.html',
                   {'downloadFileForm': _downloadFile, 'tempList': tempList, 'userFiles': userFiles,
                    'logStatus': logStatus})
@@ -395,5 +395,5 @@ def makeControl(request):
         else:
             _profileForm = profileForm()
             _commandForm = commandForm()
-        return render(request, 'downloadFilePage.html',
+        return render(request, 'makeControl.html',
                       {'profileForm': _profileForm,'commandForm':_commandForm, 'tempList': tempList,'logStatus': logStatus})
