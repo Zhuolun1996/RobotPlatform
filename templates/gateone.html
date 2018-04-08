@@ -54,8 +54,9 @@
         GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal"], function (window, undefined) {
 
             var location = user;
-            GateOne.SSH.connect(ssh_url);
+            GateOne.prefs.autoConnectURL = ssh_url;
             GateOne.Net.setLocation(location);
+            GateOne.SSH.autoConnect();
             <!--记录登录状态-->
 
         });
