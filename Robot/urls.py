@@ -35,7 +35,7 @@ urlpatterns = [
     path('uploadFile/', rsmView.uploadUserFile, name='uploadFile'),
     path('downloadFile/', rsmView.downloadUserFilePage, name='downloadFilePage'),
     path('downloadFile/<str:filePath>', rsmView.downloadUserFile, name='downloadFile'),
-    path('logout/',rsmView.logout,name='logout'),
-    path('makeControl/',rsmView.makeControl,name='makeControl'),
+    path('logout/', rsmView.logout, name='logout'),
+    path('makeControl/', rsmView.makeControl, name='makeControl'),
 
 ]
