@@ -28,10 +28,10 @@ class loginForm(forms.Form):
             cleaned_data = super(loginForm, self).clean()
 
 
-class uploadFileForm(forms.Form):
+class uploadFileForm(forms.ModelForm):
     class Meta:
         model = uploadFile
         fields = ['file','targetContainer']
 
-class downloadFileForm(forms.ModelForm):
+class downloadFileForm(forms.Form):
     filename=forms.CharField(required=True,label='filename')
