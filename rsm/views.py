@@ -338,3 +338,24 @@ def downloadUserFile(request, filePath):
     response['Content-Type'] = 'application/octet-stream'
     response['Content-Disposition'] = 'attachment;filename="%s' % filename
     return response
+
+@login_required(login_url="/login/")
+def connectControl(request,serverName):
+    _server = server.objects.get(hostName=serverName)
+    serverPort = _server.hostPort
+    userName = request.user.username
+    data = {'ccontrol':
+                {'port': int(serverPort),
+                 'username': '%s' % userName,
+                 'command':'cmd'}}
+    jsonData = json.dumps(data)
+    try:
+        receivingMessage = sendRequest(containerSock, jsonData)
+    except socket.timeout:
+        return HttpResponse('timeout')
+    if receivingMessage['ccontrol']['response'] == 'ok':
+        return redirect('http://222.200.177.38:8080/vnc_lite.html?host=222.200.177.38&port=%s'%serverPort)
+    elif receivingMessage['ccontrol']['response'] == 'failed':
+        return HttpResponse('失败')
+    else:
+        raise Http404
