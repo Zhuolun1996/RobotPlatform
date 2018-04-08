@@ -4,7 +4,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from .models import server, profile, uploadFile
 import time, hmac, hashlib, json, socket
-from .forms import profileForm, loginForm, userForm, uploadFileForm, downloadFileForm
+from .forms import profileForm, loginForm, userForm, uploadFileForm, downloadFileForm, commandForm
 from django.contrib.auth.models import User
 from ast import literal_eval
 from .socketConnect import establishContainerConnect, establishRobotConnect, sendRequest
@@ -124,7 +124,7 @@ def register(request):
     logStatus = request.user.is_authenticated
     serverNums = server.objects.all()
     if request.method == 'POST':
-        _userForm = userForm(request.POST, instance=request.user)
+        _userForm = userForm(request.POST)
         if _userForm.is_valid():
             _username = request.POST.get('username')
             _password = request.POST.get('password')
@@ -339,34 +339,61 @@ def downloadUserFile(request, filePath):
     response['Content-Disposition'] = 'attachment;filename="%s' % filename
     return response
 
+
 @login_required(login_url="/login/")
-def connectVNC(request,serverName):
+def connectVNC(request, serverName):
     _server = server.objects.get(hostName=serverName)
     serverPort = _server.hostPort
     userName = request.user.username
     data = {'ccontrol':
                 {'port': int(serverPort),
                  'username': '%s' % userName,
-                 'command':'cmd'}}
+                 'command': 'cmd'}}
     jsonData = json.dumps(data)
     try:
         receivingMessage = sendRequest(containerSock, jsonData)
     except socket.timeout:
         return HttpResponse('timeout')
     if receivingMessage['ccontrol']['response'] == 'ok':
-        return redirect('http://222.200.177.38:8080/vnc_lite.html?host=222.200.177.38&port=%s'%serverPort)
+        return redirect('http://222.200.177.38:8080/vnc_lite.html?host=222.200.177.38&port=%s' % serverPort)
     elif receivingMessage['ccontrol']['response'] == 'failed':
         return HttpResponse('失败')
     else:
         raise Http404
 
+
 @login_required(login_url="/login/")
 def makeControl(request):
     logStatus = request.user.is_authenticated
-    userFiles = uploadFile.objects.filter(belongTo=request.user)
     usingServers = literal_eval(request.user.profile.serverNum)
     tempList = []
     for item in usingServers:
         tempList.append(server.objects.get(hostName=item))
-    if request.method=='POST':
-
+    if request.method == 'POST':
+        _profileForm = profileForm(request.POST)
+        _commandForm = commandForm(request.POST)
+        if _profileForm.is_valid() and _commandForm.isvalid():
+            _serverNum = request.POST.getlist('serverNum')
+            _command = request.POST.get('command')
+            targetServers = literal_eval(_serverNum)
+            containerPort = server.objects.get(hostName=targetServers[0]).hostPort
+            data = {'ccontrol':
+                        {'port': int(containerPort),
+                         'username': request.user.username,
+                         'command': _command}}
+            jsonData = json.dumps(data)
+            try:
+                receivingMessage = sendRequest(containerSock, jsonData)
+            except socket.timeout:
+                return HttpResponse('timeout')
+            if receivingMessage['ccontrol']['response'] == 'ok':
+                return HttpResponse('success')
+            elif receivingMessage['ccontrol']['response'] == 'failed':
+                return HttpResponse('fail')
+            else:
+                return HttpResponse(receivingMessage)
+        else:
+            _profileForm = profileForm()
+            _commandForm = commandForm()
+        return render(request, 'downloadFilePage.html',
+                      {'profileForm': _profileForm,'commandForm':_commandForm, 'tempList': tempList,'logStatus': logStatus})

@@ -31,10 +31,12 @@ class loginForm(forms.Form):
 class uploadFileForm(forms.ModelForm):
     class Meta:
         model = uploadFile
-        fields = ['file','targetContainer']
+        fields = ['file', 'targetContainer']
+
 
 class downloadFileForm(forms.Form):
-    filename=forms.CharField(required=True,label='filename')
+    filename = forms.CharField(required=True, label='filename')
+
 
 class controlForm(forms.Form):
-    command=forms.CharField
+    command = forms.CharField(required=True, label='command')
