@@ -137,7 +137,7 @@ def register(request):
                 auth.login(request, loginUser)
             return redirect('/')
     else:
-        _userForm = userForm(instance=request.user)
+        _userForm = userForm()
     return render(request, 'register.html',
                   {'userForm': _userForm, 'logStatus': logStatus,
                    'serverNums': serverNums})
@@ -340,7 +340,7 @@ def downloadUserFile(request, filePath):
     return response
 
 @login_required(login_url="/login/")
-def connectControl(request,serverName):
+def connectVNC(request,serverName):
     _server = server.objects.get(hostName=serverName)
     serverPort = _server.hostPort
     userName = request.user.username
@@ -359,3 +359,14 @@ def connectControl(request,serverName):
         return HttpResponse('失败')
     else:
         raise Http404
+
+@login_required(login_url="/login/")
+def makeControl(request):
+    logStatus = request.user.is_authenticated
+    userFiles = uploadFile.objects.filter(belongTo=request.user)
+    usingServers = literal_eval(request.user.profile.serverNum)
+    tempList = []
+    for item in usingServers:
+        tempList.append(server.objects.get(hostName=item))
+    if request.method=='POST':
+

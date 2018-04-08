@@ -35,3 +35,6 @@ class uploadFileForm(forms.ModelForm):
 
 class downloadFileForm(forms.Form):
     filename=forms.CharField(required=True,label='filename')
+
+class controlForm(forms.Form):
+    command=forms.CharField
