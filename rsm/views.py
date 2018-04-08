@@ -320,7 +320,7 @@ def downloadUserFilePage(request):
             elif receivingMessage['cdownload']['response'] == 'fail':
                 return HttpResponse('fail')
             else:
-                raise Http404
+                return HttpResponse(receivingMessage)
     else:
         _downloadFile = downloadFileForm(request.POST)
     return render(request, 'downloadFilePage.html',
