@@ -269,7 +269,7 @@ def uploadUserFile(request):
                          'filename': userFile.getFileName()}}
             jsonData = json.dumps(data)
             try:
-                receivingMessage = sendRequest(robotSock, jsonData)
+                receivingMessage = sendRequest(containerSock, jsonData)
             except socket.timeout:
                 return HttpResponse('timeout')
             if receivingMessage['cupload']['response'] == 'ok':
@@ -305,7 +305,7 @@ def downloadUserFilePage(request):
                          'filename': _filename}}
             jsonData = json.dumps(data)
             try:
-                receivingMessage = sendRequest(robotSock, jsonData)
+                receivingMessage = sendRequest(containerSock, jsonData)
             except socket.timeout:
                 return HttpResponse('timeout')
             if receivingMessage['cdownload']['response'] == 'ok':
