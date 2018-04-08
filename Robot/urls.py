@@ -33,7 +33,7 @@ urlpatterns = [
     path('connectRobot/', rsmView.connectRobot, name='connectRobot'),
     path('disconnectRobot/<int:_robotNo>', rsmView.disconnectRobot, name='disconnectRobot'),
     path('uploadFile/', rsmView.uploadUserFile, name='uploadFile'),
-    path('downloadFilePage/', rsmView.downloadUserFilePage, name='downloadFilePage'),
+    path('downloadFile/', rsmView.downloadUserFilePage, name='downloadFilePage'),
     path('downloadFile/<str:filePath>', rsmView.downloadUserFile, name='downloadFile'),
 
 ]
