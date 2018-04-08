@@ -43,6 +43,7 @@ def upload_to(instance, filename):
 class uploadFile(models.Model):
     belongTo = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     file = models.FileField(upload_to=upload_to, default='default.txt',null=False)
+    targetContainer = models.CharField(null=False,default='server0',max_length=20)
 
     def __str__(self):
         return self.file.name

@@ -4,4 +4,17 @@
     {% for item in userFiles %}
         <p><a href="/downloadFile/{{ item.getFilePath }}">{{ item.getFileName }}</a></p>
     {% endfor %}
+
+    <form class="form-horizontal" role="form" action="/downloadFile/" target="_blank" method="post">
+        {% csrf_token %}
+        <input type="text" name="filename" id="id_filename">
+        <select name="targetContainer" id="id_targetContainer">
+            {% for item in tempList %}
+                <option value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+        </select>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">上传</button>
+        </div>
+    </form>
 {% endblock %}

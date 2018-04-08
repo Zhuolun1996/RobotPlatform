@@ -4,20 +4,17 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from .models import server, profile, uploadFile
 import time, hmac, hashlib, json, socket
-from .forms import profileForm, loginForm, userForm, uploadFileForm
+from .forms import profileForm, loginForm, userForm, uploadFileForm, downloadFileForm
 from django.contrib.auth.models import User
 from ast import literal_eval
 from .socketConnect import establishContainerConnect, establishRobotConnect, sendRequest
 from Robot.settings import CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_PORT, ROBOT_TARGET_SERVER_IP, \
-    ROBOT_TARGET_SERVER_PORT
+    ROBOT_TARGET_SERVER_PORT, MEDIA_ROOT, GateOneServer
 from django.http import FileResponse
+import os
 
-
-# try:
-# containerSock = establishContainerConnect(CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_PORT)
-# robotSock = establishRobotConnect(ROBOT_TARGET_SERVER_IP, ROBOT_TARGET_SERVER_PORT)
-# except:
-#     print('Connection Refused')
+containerSock = establishContainerConnect(CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_PORT)
+robotSock = establishRobotConnect(ROBOT_TARGET_SERVER_IP, ROBOT_TARGET_SERVER_PORT)
 
 
 # Create your views here.
@@ -42,7 +39,7 @@ def createSignature(secret, *parts):
 
 def getAuthObj(request):
     # 安装gateone的服务器以及端口.
-    gateone_server = 'https://127.0.0.1'
+    gateone_server = GateOneServer
     # 之前生成的api_key 和secret
     secret = 'MzAwNmVkODAwNGJlNDRmYjlkZTIxMDgyZjU2YTMyMDczN'
     api_key = 'MzUxMmRhNTY5YmY5NGNiNWE2ZmJkZGUwODIxY2VlNjYwZ'
@@ -253,31 +250,89 @@ def disconnectRobot(request, _robotNo):
 @login_required(login_url="/login/")
 def uploadUserFile(request):
     logStatus = request.user.is_authenticated
+    usingServers = literal_eval(request.user.profile.serverNum)
+    tempList = []
+    for item in usingServers:
+        tempList.append(server.objects.get(hostName=item))
     if request.method == 'POST':
-        _uploadFile = uploadFileForm(request.FILES)
+        _uploadFile = uploadFileForm(request.FILES, request.POST)
         if _uploadFile.is_valid():
             _file = request.FILES.get('uploadFile')
-            userFile = uploadFile(belongTo=request.user, file=_file)
+            _targetContainer = request.POST.get('targetContainer')
+            userFile = uploadFile(belongTo=request.user, file=_file, targetContainer=_targetContainer)
             userFile.save()
-            return redirect('/')
+
+            containerPort = server.objects.get(hostName=_targetContainer).hostPort
+            data = {'cupload':
+                        {'port': containerPort,
+                         'username': request.user,
+                         'filename': userFile.getFileName()}}
+            jsonData = json.dumps(data)
+            try:
+                receivingMessage = sendRequest(robotSock, jsonData)
+            except socket.timeout:
+                return HttpResponse('timeout')
+            if receivingMessage['cupload']['response'] == 'ok':
+                return HttpResponse('success')
+            elif receivingMessage['cupload']['response'] == 'failed':
+                return HttpResponse('fail')
+            else:
+                raise Http404
     else:
-        _uploadFile = uploadFileForm(request.FILES)
+        _uploadFile = uploadFileForm(request.FILES, request.POST)
     return render(request, 'uploadFilePage.html',
-                  {'uploadFileForm': _uploadFile, 'logStatus': logStatus})
+                  {'uploadFileForm': _uploadFile, 'logStatus': logStatus, 'tempList': tempList})
 
 
 @login_required(login_url="/login/")
 def downloadUserFilePage(request):
     logStatus = request.user.is_authenticated
     userFiles = uploadFile.objects.filter(belongTo=request.user)
-    return render(request, 'downloadFilePage.html', {'userFiles': userFiles, 'logStatus': logStatus})
+    usingServers = literal_eval(request.user.profile.serverNum)
+    tempList = []
+    for item in usingServers:
+        tempList.append(server.objects.get(hostName=item))
+    if request.method == 'POST':
+        _downloadFile = downloadFileForm(request.POST)
+        if _downloadFile.is_valid():
+            _filename = request.POST.get('filename')
+            _targetContainer = request.POST.get('targetContainer')
+            containerPort = server.objects.get(hostName=_targetContainer).hostPort
+
+            data = {'cdownload':
+                        {'port': containerPort,
+                         'username': request.user,
+                         'filename': _filename}}
+            jsonData = json.dumps(data)
+            try:
+                receivingMessage = sendRequest(robotSock, jsonData)
+            except socket.timeout:
+                return HttpResponse('timeout')
+            if receivingMessage['cdownload']['response'] == 'ok':
+                _file = os.path.join(MEDIA_ROOT, 'files', request.user, _filename)
+                _targetContainer = request.POST.get('targetContainer')
+                userFile = uploadFile()
+                userFile.belongTo = request.user
+                userFile.file.name = _file
+                userFile.targetContainer = _targetContainer
+                userFile.save()
+                return HttpResponse('success')
+            elif receivingMessage['cdownload']['response'] == 'fail':
+                return HttpResponse('fail')
+            else:
+                raise Http404
+    else:
+        _downloadFile = downloadFileForm(request.POST)
+    return render(request, 'downloadFilePage.html',
+                  {'downloadFileForm': _downloadFile, 'tempList': tempList, 'userFiles': userFiles,
+                   'logStatus': logStatus})
 
 
 @login_required(login_url="/login/")
 def downloadUserFile(request, filePath):
-    realFilePath=filePath.replace('+','/')
-    realFilePath=realFilePath.replace('=',' ')
-    filename=realFilePath.split('/')[-1]
+    realFilePath = filePath.replace('+', '/')
+    realFilePath = realFilePath.replace('=', ' ')
+    filename = realFilePath.split('/')[-1]
     file = open(realFilePath, 'rb')
     response = FileResponse(file)
     response['Content-Type'] = 'application/octet-stream'
