@@ -9,7 +9,7 @@
                 <div class="col-sm-9"><select multiple="multiple" class="form-control" id="id_serverNum"
                                               name="serverNum">
                     {% for item in tempList %}
-                        <option value='{{ item.hostName }}'>{{ item.hostName }},{{ item.hostIP }},{{ item.hostPort }}</option>
+                        <option value='{{ item }}'>{{ item }}</option>
                     {% endfor %}
                 </select>
                 </div>
