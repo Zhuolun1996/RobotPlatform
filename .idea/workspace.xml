@@ -22,8 +22,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rsm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="257" column="64" lean-forward="false" selection-start-line="257" selection-start-column="64" selection-end-line="257" selection-end-column="64" />
+            <state relative-caret-position="591">
+              <caret line="303" column="58" lean-forward="false" selection-start-line="303" selection-start-column="58" selection-end-line="303" selection-end-column="58" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
@@ -682,8 +682,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rsm/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="257" column="64" lean-forward="false" selection-start-line="257" selection-start-column="64" selection-end-line="257" selection-end-column="64" />
+        <state relative-caret-position="591">
+          <caret line="303" column="58" lean-forward="false" selection-start-line="303" selection-start-column="58" selection-end-line="303" selection-end-column="58" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
           </folding>
