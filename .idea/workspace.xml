@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f1f8858c-ba95-46c6-b7eb-c83032ad5605" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/rsm/views.py" afterPath="$PROJECT_DIR$/rsm/views.py" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
-      <change beforePath="$PROJECT_DIR$/templates/welcomePage.html" afterPath="$PROJECT_DIR$/templates/welcomePage.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,8 +22,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rsm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="374" column="55" lean-forward="false" selection-start-line="374" selection-start-column="55" selection-end-line="374" selection-end-column="55" />
+            <state relative-caret-position="167">
+              <caret line="377" column="66" lean-forward="false" selection-start-line="377" selection-start-column="66" selection-end-line="377" selection-end-column="66" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
@@ -697,8 +694,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rsm/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="374" column="55" lean-forward="false" selection-start-line="374" selection-start-column="55" selection-end-line="374" selection-end-column="55" />
+        <state relative-caret-position="167">
+          <caret line="377" column="66" lean-forward="false" selection-start-line="377" selection-start-column="66" selection-end-line="377" selection-end-column="66" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
           </folding>

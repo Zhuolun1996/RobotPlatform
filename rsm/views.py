@@ -375,8 +375,7 @@ def makeControl(request):
         if _profileForm.is_valid() and _commandForm.is_valid():
             _serverNum = request.POST.getlist('serverNum')
             _command = request.POST.get('command')
-            targetServers = literal_eval(_serverNum)
-            containerPort = server.objects.get(hostName=targetServers[0]).hostPort
+            containerPort = server.objects.get(hostName=_serverNum[0]).hostPort
             data = {'ccontrol':
                         {'port': int(containerPort),
                          'username': request.user.username,
