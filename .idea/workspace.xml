@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1f8858c-ba95-46c6-b7eb-c83032ad5605" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Robot/urls.py" afterPath="$PROJECT_DIR$/Robot/urls.py" />
       <change beforePath="$PROJECT_DIR$/rsm/forms.py" afterPath="$PROJECT_DIR$/rsm/forms.py" />
-      <change beforePath="$PROJECT_DIR$/rsm/views.py" afterPath="$PROJECT_DIR$/rsm/views.py" />
-      <change beforePath="$PROJECT_DIR$/templates/makeControl.html" afterPath="$PROJECT_DIR$/templates/makeControl.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,7 +19,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rsm/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
@@ -34,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rsm/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="41" column="59" lean-forward="false" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
+            <state relative-caret-position="263">
+              <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -58,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/templates/uploadFilePage.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+              <caret line="10" column="24" lean-forward="false" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -98,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/templates/modify.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="14" column="18" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="14" />
+              <caret line="14" column="18" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -175,10 +172,10 @@
         <option value="$PROJECT_DIR$/templates/welcomePage.html" />
         <option value="$PROJECT_DIR$/templates/gateone.html" />
         <option value="$PROJECT_DIR$/templates/gateoneRobot.html" />
-        <option value="$PROJECT_DIR$/rsm/forms.py" />
         <option value="$PROJECT_DIR$/Robot/urls.py" />
         <option value="$PROJECT_DIR$/rsm/views.py" />
         <option value="$PROJECT_DIR$/templates/makeControl.html" />
+        <option value="$PROJECT_DIR$/rsm/forms.py" />
       </list>
     </option>
   </component>
@@ -632,7 +629,7 @@
     <entry file="file://$PROJECT_DIR$/templates/uploadFilePage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <caret line="10" column="24" lean-forward="false" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -641,14 +638,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
           <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rsm/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="41" column="59" lean-forward="false" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
           <folding />
         </state>
       </provider>
@@ -672,7 +661,7 @@
     <entry file="file://$PROJECT_DIR$/templates/modify.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="14" column="18" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="14" />
+          <caret line="14" column="18" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -700,6 +689,14 @@
           <folding>
             <element signature="e#0#68#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rsm/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>

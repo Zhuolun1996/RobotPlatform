@@ -38,5 +38,5 @@ class downloadFileForm(forms.Form):
     filename = forms.CharField(required=True, label='filename')
 
 
-class controlForm(forms.Form):
+class commandForm(forms.Form):
     command = forms.CharField(required=True, label='command')
