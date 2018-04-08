@@ -277,7 +277,7 @@ def uploadUserFile(request):
             elif receivingMessage['cupload']['response'] == 'failed':
                 return HttpResponse('fail')
             else:
-                raise HttpResponse(receivingMessage)
+                return HttpResponse(receivingMessage)
     else:
         _uploadFile = uploadFileForm(request.FILES, request.POST)
     return render(request, 'uploadFilePage.html',
