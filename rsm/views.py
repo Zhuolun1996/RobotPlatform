@@ -372,7 +372,7 @@ def makeControl(request):
     if request.method == 'POST':
         _profileForm = profileForm(request.POST)
         _commandForm = commandForm(request.POST)
-        if _profileForm.is_valid() and _commandForm.isvalid():
+        if _profileForm.is_valid() and _commandForm.is_valid():
             _serverNum = request.POST.getlist('serverNum')
             _command = request.POST.get('command')
             targetServers = literal_eval(_serverNum)
