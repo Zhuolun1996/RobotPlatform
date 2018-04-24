@@ -13,8 +13,32 @@ from Robot.settings import CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_P
 from django.http import FileResponse
 import os
 
-containerSock = establishContainerConnect(CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_PORT)
-robotSock = establishRobotConnect(ROBOT_TARGET_SERVER_IP, ROBOT_TARGET_SERVER_PORT)
+global containerSock
+global robotSock
+global beatNo
+
+
+def establishConnection():
+    global containerSock
+    global robotSock
+    try:
+        containerSock = establishContainerConnect(CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_PORT)
+        robotSock = establishRobotConnect(ROBOT_TARGET_SERVER_IP, ROBOT_TARGET_SERVER_PORT)
+    except:
+        pass
+
+def testConnection():
+    data = {'heartbeat': 'no'}
+    jsonData = json.dumps(data)
+    try:
+        receivingMessage = sendRequest(containerSock, jsonData)
+    except socket.timeout:
+        return HttpResponse('timeout')
+    except:
+        establishConnection()
+
+
+establishConnection()
 
 
 # Create your views here.
@@ -116,8 +140,8 @@ def deleteUserRequest(request, serverName):
 
 def mainPage(request):
     if request.user.is_authenticated == True:
-        return redirect('welcomePage/')
-    return render(request, 'index.html')
+        return render(request,'index.html',{'logStatus':request.user.is_authenticated})
+    return render(request, 'loginPage.html',{'logStatus':request.user.is_authenticated})
 
 
 def register(request):
@@ -188,21 +212,23 @@ def manageAccountServers(request):
 
 
 @login_required(login_url="/login/")
-def welcomePage(request):
+def robotPage(request):
+    logStatus=request.user.is_authenticated
     usingServers = literal_eval(request.user.profile.serverNum)
     print(usingServers)
     tempList = []
     for item in usingServers:
         tempList.append(server.objects.get(hostName=item))
-    return render(request, 'welcomePage.html', {'hosts': tempList})
+    return render(request, 'robotPage.html', {'hosts': tempList,'logStatus':logStatus})
 
 
 @login_required(login_url="/login/")
 def manageServers(request):
+    logStatus=request.user.is_authenticated
     allServers = server.objects.values_list('hostName', flat=True)
     usingServers = literal_eval(request.user.profile.serverNum)
     notUsingServers = list(set(allServers) - set(usingServers))
-    return render(request, 'manageServers.html', {'usingHosts': usingServers, 'notUsingHosts': notUsingServers})
+    return render(request, 'manageServers.html', {'usingHosts': usingServers, 'notUsingHosts': notUsingServers,'logStatus':logStatus})
 
 
 @login_required(login_url="/login/")

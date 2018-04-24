@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rsm.apps.RsmConfig',
     'bootstrap3',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,7 @@ STATICFILES_DIRS = (
     ('js', os.path.join(STATIC_ROOT, 'js')),
 
 )
+
+CRONJOBS = [
+    ('5 * * * *', 'rsm.views.testConnection')
+]

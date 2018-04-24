@@ -1,17 +1,30 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 {% block content %}
-    <form class="form-horizontal" role="form" action="/uploadFile/"  method="post"
-          enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="file" name="uploadFile" id="id_uploadFile">
-        <select name="targetContainer" id="id_targetContainer">
-            {% for item in tempList %}
-                <option value="{{ item }}">{{ item }}</option>
-            {% endfor %}
-        </select>
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary">上传</button>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="page-header">
+                <h2>上传文件</h2>
+            </div>
+            <form class="form-horizontal" role="form" action="/uploadFile/" method="post"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="control-label" for="id_uploadFile">选择文件</label>
+                    <input class="form-control" type="file" name="uploadFile" id="id_uploadFile">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="id_targetContainer">选择容器</label>
+                    <select class="form-control" name="targetContainer" id="id_targetContainer">
+                        {% for item in tempList %}
+                            <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">上传</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 {% endblock %}

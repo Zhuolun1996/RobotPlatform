@@ -1,20 +1,35 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 {% block content %}
-    {% for item in userFiles %}
-        <p><a href="/downloadFile/{{ item.getFilePath }}">{{ item.getFileName }}</a></p>
-    {% endfor %}
-
-    <form class="form-horizontal" role="form" action="/downloadFile/" target="_blank" method="post">
-        {% csrf_token %}
-        <input type="text" name="filename" id="id_filename">
-        <select name="targetContainer" id="id_targetContainer">
-            {% for item in tempList %}
-                <option value="{{ item }}">{{ item }}</option>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="page-header">
+                <h2>下载到服务器</h2>
+            </div>
+            <form class="form-horizontal" role="form" action="/downloadFile/" target="_blank" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="control-label" for="id_filename">文件名</label>
+                    <input class="form-control" type="text" name="filename" id="id_filename">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="id_targetContainer">文件所在机器人</label>
+                    <select class="form-control" name="targetContainer" id="id_targetContainer" class="form-control">
+                        {% for item in tempList %}
+                            <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">下载</button>
+                </div>
+            </form>
+       <div class="page-header">
+           <h2>文件列表</h2>
+       </div>
+        {% for item in userFiles %}
+                <p><a href="/downloadFile/{{ item.getFilePath }}">{{ item.getFileName }}</a></p>
             {% endfor %}
-        </select>
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary">下载</button>
         </div>
-    </form>
+    </div>
 {% endblock %}

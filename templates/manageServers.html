@@ -1,20 +1,58 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 {% block content %}
-    {% for item in usingHosts %}
-        <h3>{{ item }}</h3>
-        {#        <a href="/createUserRequest/{{ item.hostName }}/">创建用户</a>#}
-        <a href="/deleteUserRequest/{{ item }}/">删除用户</a>
-    {% endfor %}
-    {% for item in notUsingHosts %}
-        <h3>{{ item }}</h3>
-        <a href="/createUserRequest/{{ item }}/">创建用户</a>
-        {#        <a href="/deleteUserRequest/{{ item.hostName }}/">删除用户</a>#}
-    {% endfor %}
-    <p>
-        <a href="/modify/">modify user data</a>
-    </p>
-    <p>
-        <a href="/createUserRequest/">request create user</a>
-    </p>
+
+    <div class="page-header">
+        <h1>虚拟机器人管理</h1>
+    </div>
+    <div class="page-header">
+        <h3>已使用虚拟机器人</h3>
+    </div>
+    <div class="row">
+        {% for item in usingHosts %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3 class="text-center">{{ item }}</h3>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary" href="/deleteUserRequest/{{ item }}/">
+                                删除用户
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{#            <h3>{{ item }}</h3>#}
+            {#        <a href="/createUserRequest/{{ item.hostName }}/">创建用户</a>#}
+{#            <a href="/deleteUserRequest/{{ item }}/">删除用户</a>#}
+        {% endfor %}
+    </div>
+    <div class="row">
+    <div class="page-header">
+        <h3>未使用虚拟机器人</h3>
+    </div>
+        {% for item in notUsingHosts %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3 class="text-center">{{ item }}</h3>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary" href="/createUserRequest/{{ item }}/">
+                                创建用户
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{#            <h3>{{ item }}</h3>#}
+{#            <a href="/createUserRequest/{{ item }}/">创建用户</a>#}
+            {#        <a href="/deleteUserRequest/{{ item.hostName }}/">删除用户</a>#}
+        {% endfor %}
+    </div>
+    {#    <p>#}
+    {#        <a href="/modify/">modify user data</a>#}
+    {#    </p>#}
+    {#    <p>#}
+    {#        <a href="/createUserRequest/">request create user</a>#}
+    {#    </p>#}
 {% endblock %}
