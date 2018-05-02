@@ -26,7 +26,7 @@
     $(document).ready(function () {
         var ip = '{{ host_ip }}';
         var user = '{{ host_user }}';
-        var port = '{{ host_port }}';
+        var port = {{ host_port }};
         console.log(ip);
         console.log(user);
         console.log(port);
@@ -52,7 +52,15 @@
 
         });
 
-        GateOne.SSH.connect(ssh_url);
+        GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal"], function (window, undefined) {
+
+            var location = user;
+            GateOne.prefs.autoConnectURL=ssh_url;
+            GateOne.locations;
+            GateOne.Net.setLocation(location);
+            <!--记录登录状态-->
+
+        });
 
 
     });
