@@ -24,6 +24,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        var flag = false;
         var ip = '{{ host_ip }}';
         var user = '{{ host_user }}';
         var port = {{ host_port }};
@@ -55,7 +56,7 @@
 
         GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal"], function (window, undefined) {
 
-            var flag = false;
+
             var location = user;
             GateOne.prefs.autoConnectURL = ssh_url;
             GateOne.locations;
