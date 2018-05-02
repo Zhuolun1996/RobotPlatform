@@ -47,7 +47,7 @@
                 url: auth_url,
                 theme: 'black',
                 goDiv: '#gateone',
-                autoConnectURL: ssh_url
+                {#autoConnectURL: ssh_url#}
             });
 
         });
@@ -55,8 +55,8 @@
         GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal"], function (window, undefined) {
 
             var location = user;
-            GateOne.prefs.autoConnectURL=ssh_url;
-            GateOne.SSH.autoConnect();
+            {#GateOne.prefs.autoConnectURL=ssh_url;#}
+            GateOne.SSH.connect(ssh_url);
             GateOne.Net.setLocation(location);
             <!--记录登录状态-->
 
