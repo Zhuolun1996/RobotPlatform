@@ -27,6 +27,7 @@ def establishConnection():
     except:
         pass
 
+
 def testConnection():
     data = {'heartbeat': 'no'}
     jsonData = json.dumps(data)
@@ -40,6 +41,7 @@ def testConnection():
 
 establishConnection()
 testConnection()
+
 
 # Create your views here.
 def hostConnect(request):
@@ -140,8 +142,8 @@ def deleteUserRequest(request, serverName):
 
 def mainPage(request):
     if request.user.is_authenticated == True:
-        return render(request,'index.html',{'logStatus':request.user.is_authenticated})
-    return render(request, 'loginPage.html',{'logStatus':request.user.is_authenticated})
+        return render(request, 'index.html', {'logStatus': request.user.is_authenticated, 'title': '机器人实验平台'})
+    return render(request, 'loginPage.html', {'logStatus': request.user.is_authenticated, 'title': '机器人实验平台 - 登录'})
 
 
 def register(request):
@@ -164,7 +166,7 @@ def register(request):
         _userForm = userForm()
     return render(request, 'register.html',
                   {'userForm': _userForm, 'logStatus': logStatus,
-                   'serverNums': serverNums})
+                   'serverNums': serverNums, 'title': '机器人实验平台 - 注册'})
 
 
 def login(request):
@@ -183,7 +185,7 @@ def login(request):
                               {'form': form, 'password_is_wrong': True, 'logStatus': log_status})
     else:
         form = loginForm()
-        return render(request, 'loginPage.html', {'form': form, 'logStatus': log_status})
+        return render(request, 'loginPage.html', {'form': form, 'logStatus': log_status, 'title': '机器人实验平台 - 登录'})
 
 
 @login_required(login_url="/login/")
@@ -213,22 +215,24 @@ def manageAccountServers(request):
 
 @login_required(login_url="/login/")
 def robotPage(request):
-    logStatus=request.user.is_authenticated
+    logStatus = request.user.is_authenticated
     usingServers = literal_eval(request.user.profile.serverNum)
     print(usingServers)
     tempList = []
     for item in usingServers:
         tempList.append(server.objects.get(hostName=item))
-    return render(request, 'robotPage.html', {'hosts': tempList,'logStatus':logStatus})
+    return render(request, 'robotPage.html', {'hosts': tempList, 'logStatus': logStatus, 'title': '机器人实验平台 - 连接虚拟机器人'})
 
 
 @login_required(login_url="/login/")
 def manageServers(request):
-    logStatus=request.user.is_authenticated
+    logStatus = request.user.is_authenticated
     allServers = server.objects.values_list('hostName', flat=True)
     usingServers = literal_eval(request.user.profile.serverNum)
     notUsingServers = list(set(allServers) - set(usingServers))
-    return render(request, 'manageServers.html', {'usingHosts': usingServers, 'notUsingHosts': notUsingServers,'logStatus':logStatus})
+    return render(request, 'manageServers.html',
+                  {'usingHosts': usingServers, 'notUsingHosts': notUsingServers, 'logStatus': logStatus,
+                   'title': '机器人实验平台 - 用户设置'})
 
 
 @login_required(login_url="/login/")
@@ -307,7 +311,8 @@ def uploadUserFile(request):
     else:
         _uploadFile = uploadFileForm()
     return render(request, 'uploadFilePage.html',
-                  {'uploadFileForm': _uploadFile, 'logStatus': logStatus, 'tempList': tempList})
+                  {'uploadFileForm': _uploadFile, 'logStatus': logStatus, 'tempList': tempList,
+                   'title': '机器人实验平台 - 上传文件'})
 
 
 @login_required(login_url="/login/")
@@ -351,7 +356,7 @@ def downloadUserFilePage(request):
         _downloadFile = downloadFileForm()
     return render(request, 'downloadFilePage.html',
                   {'downloadFileForm': _downloadFile, 'tempList': tempList, 'userFiles': userFiles,
-                   'logStatus': logStatus})
+                   'logStatus': logStatus, 'title': '机器人实验平台 - 下载文件'})
 
 
 @login_required(login_url="/login/")
@@ -422,4 +427,4 @@ def makeControl(request):
         _commandForm = commandForm()
     return render(request, 'makeControl.html',
                   {'profileForm': _profileForm, 'commandForm': _commandForm, 'tempList': tempList,
-                   'logStatus': logStatus})
+                   'logStatus': logStatus, 'title': '机器人实验平台 - 远程控制'})
