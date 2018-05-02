@@ -50,8 +50,10 @@ def hostConnect(request):
     host_port = request.POST.get('port', 22)
 
     if host_port == "": host_port = 22
+    uniqueLabel = hash(time.time())
     print(host_port)
-    return render(request, 'gateone.html', {'host_ip': host_ip, 'host_user': host_user, 'host_port': host_port})
+    return render(request, 'gateone.html',
+                  {'host_ip': host_ip, 'host_user': host_user, 'host_port': host_port, 'uniqueLabel': uniqueLabel})
 
 
 # 获取get请求的信息，然后返回gateone的页面
@@ -248,10 +250,11 @@ def connectRobot(request):
         robotIP = receivingMessage['linkrobot']['robotip']
         robotPort = receivingMessage['linkrobot']['robotport']
         robotNo = receivingMessage['linkrobot']['robotno']
+        uniqueLabel = hash(time.time())
         print(robotIP, robotPort, robotNo)
         return render(request, 'gateoneRobot.html',
                       {'host_ip': ROBOT_TARGET_SERVER_IP, 'host_user': 'stu', 'host_port': robotPort,
-                       'robotNo': robotNo})
+                       'robotNo': robotNo, 'uniqueLabel': uniqueLabel})
     elif receivingMessage['linkrobot']['response'] == 'fail':
         return HttpResponse(receivingMessage['linkrobot']['reason'])
     else:

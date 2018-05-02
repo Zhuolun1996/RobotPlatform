@@ -55,13 +55,10 @@
         GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal"], function (window, undefined) {
 
 
-            var location = user;
+            var location = user+{{ uniqueLabel }};
             GateOne.prefs.autoConnectURL = ssh_url;
             GateOne.locations;
             GateOne.Net.setLocation(location);
-            if (!window.location.href.match("ssh_once")) {
-                window.location.href = window.location.href + '&ssh_once=true';
-            }
             <!--记录登录状态-->
 
         });
