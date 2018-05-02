@@ -39,7 +39,7 @@ def testConnection():
 
 
 establishConnection()
-
+testConnection()
 
 # Create your views here.
 def hostConnect(request):

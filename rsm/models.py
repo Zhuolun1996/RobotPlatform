@@ -7,9 +7,17 @@ from django.dispatch import receiver
 
 # Create your models here.
 class server(models.Model):
+    SERVER_CHOICES = (
+        ('Indigo', 'Indigo'),
+        ('Kinetic', 'Kinetic'),
+        ('Lunar', 'Lunar'),
+        ('Linux14', 'Linux14'),
+        ('Linux16', 'Linux16')
+    )
     hostName = models.CharField(max_length=20, null=False, default='No Name', primary_key=True)
     hostIP = models.GenericIPAddressField()
     hostPort = models.CharField(max_length=5, null=False, default='0')
+    category = models.CharField(max_length=10, choices=SERVER_CHOICES, null=False, default='Linux16')
 
     def __str__(self):
         return self.hostName
@@ -42,15 +50,15 @@ def upload_to(instance, filename):
 
 class uploadFile(models.Model):
     belongTo = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    file = models.FileField(upload_to=upload_to, default='default.txt',null=False,blank=False)
-    targetContainer = models.CharField(null=False,default='server0',max_length=20)
+    file = models.FileField(upload_to=upload_to, default='default.txt', null=False, blank=False)
+    targetContainer = models.CharField(null=False, default='server0', max_length=20)
 
     def __str__(self):
         return self.file.name
 
     def getFilePath(self):
-        tempFileName=self.file.path.replace('/','+')
-        tempFileName=tempFileName.replace(' ','=')
+        tempFileName = self.file.path.replace('/', '+')
+        tempFileName = tempFileName.replace(' ', '=')
         return tempFileName
 
     def getFileName(self):
