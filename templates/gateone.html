@@ -52,7 +52,6 @@
 
         });
 
-        window.location.href = window.location.href+'?ssh_once=true';
 
         GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal"], function (window, undefined) {
 
@@ -60,6 +59,7 @@
             GateOne.prefs.autoConnectURL = ssh_url;
             GateOne.locations;
             GateOne.Net.setLocation(location);
+            window.location.href = window.location.href+'&ssh_once=true';
             <!--记录登录状态-->
 
         });
