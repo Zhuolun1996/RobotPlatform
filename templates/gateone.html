@@ -47,13 +47,13 @@
                 url: auth_url,
                 theme: 'black',
                 goDiv: '#gateone',
-                {#autoConnectURL: ssh_url#}
+                autoConnectURL: ssh_url
             });
 
         });
 
         var location = user;
-        GateOne.SSH.connect(ssh_url);
+        GateOne.SSH.autoConnect(ssh_url);
         GateOne.Net.setLocation(location);
         <!--记录登录状态-->
 
