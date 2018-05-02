@@ -51,7 +51,7 @@
             });
 
         });
-        GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal"], function (window, undefined) {
+        GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal", "GateOne.SSH"], function (window, undefined) {
 
             var location = user;
             GateOne.SSH.connect(ssh_url);

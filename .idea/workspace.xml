@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f1f8858c-ba95-46c6-b7eb-c83032ad5605" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/templates/gateone.html" afterPath="$PROJECT_DIR$/templates/gateone.html" />
-      <change beforePath="$PROJECT_DIR$/templates/gateoneRobot.html" afterPath="$PROJECT_DIR$/templates/gateoneRobot.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,8 +22,8 @@
       <file leaf-file-name="gateone.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/gateone.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="50" column="15" lean-forward="true" selection-start-line="50" selection-start-column="15" selection-end-line="50" selection-end-column="15" />
+            <state relative-caret-position="203">
+              <caret line="63" column="7" lean-forward="true" selection-start-line="63" selection-start-column="7" selection-end-line="63" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -182,8 +181,8 @@
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/templates/robotPage.html" />
         <option value="$PROJECT_DIR$/rsm/views.py" />
-        <option value="$PROJECT_DIR$/templates/gateone.html" />
         <option value="$PROJECT_DIR$/templates/gateoneRobot.html" />
+        <option value="$PROJECT_DIR$/templates/gateone.html" />
       </list>
     </option>
   </component>
@@ -704,8 +703,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/gateone.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="50" column="15" lean-forward="true" selection-start-line="50" selection-start-column="15" selection-end-line="50" selection-end-column="15" />
+        <state relative-caret-position="203">
+          <caret line="63" column="7" lean-forward="true" selection-start-line="63" selection-start-column="7" selection-end-line="63" selection-end-column="7" />
           <folding />
         </state>
       </provider>
