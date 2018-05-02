@@ -12,6 +12,7 @@
                         <h3 class="text-center">{{ item.hostName }}</h3>
                         <p>IP:{{ item.hostIP }}</p>
                         <p>Port:{{ item.hostPort }}</p>
+                        <p>类型:{{ item.category }}</p>
                         <form class="form-horizontal" role="form" action="/hostConnect/" target="_blank"
                               method="post">
                             {% csrf_token %}
