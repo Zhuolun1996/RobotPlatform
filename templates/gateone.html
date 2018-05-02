@@ -23,21 +23,24 @@
 
 
 <script type="text/javascript">
-    function changeURLArg(url,arg,arg_val){
-    var pattern=arg+'=([^&]*)';
-    var replaceText=arg+'='+arg_val;
-    if(url.match(pattern)){
-        var tmp='/('+ arg+'=)([^&]*)/gi';
-        tmp=url.replace(eval(tmp),replaceText);
-        return tmp;
-    }else{
-        if(url.match('[\?]')){
-            return url+'&'+replaceText;
-        }else{
-            return url+'?'+replaceText;
+    function changeURLArg(url, arg, arg_val) {
+        var pattern = arg + '=([^&]*)';
+        var replaceText = arg + '=' + arg_val;
+        if (url.match(pattern)) {
+            var tmp = '/(' + arg + '=)([^&]*)/gi';
+            tmp = url.replace(eval(tmp), replaceText);
+            return tmp;
+        } else {
+            if (url.match('[\?]')) {
+                return url + '&' + replaceText;
+            } else {
+                return url + '?' + replaceText;
+            }
         }
     }
-}
+
+    window.location.href = changeURLArg(window.location.href, 'ssh_once', 'true')
+
     $(document).ready(function () {
         var ip = '{{ host_ip }}';
         var user = '{{ host_user }}';
@@ -75,7 +78,6 @@
             GateOne.prefs.autoConnectURL = ssh_url;
             GateOne.locations;
             GateOne.Net.setLocation(location);
-            window.location.href = changeURLArg(window.location.href,'ssh_once','true')
             <!--记录登录状态-->
 
         });
