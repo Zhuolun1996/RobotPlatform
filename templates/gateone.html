@@ -23,8 +23,22 @@
 
 
 <script type="text/javascript">
+    function changeURLArg(url,arg,arg_val){
+    var pattern=arg+'=([^&]*)';
+    var replaceText=arg+'='+arg_val;
+    if(url.match(pattern)){
+        var tmp='/('+ arg+'=)([^&]*)/gi';
+        tmp=url.replace(eval(tmp),replaceText);
+        return tmp;
+    }else{
+        if(url.match('[\?]')){
+            return url+'&'+replaceText;
+        }else{
+            return url+'?'+replaceText;
+        }
+    }
+}
     $(document).ready(function () {
-        var flag = false;
         var ip = '{{ host_ip }}';
         var user = '{{ host_user }}';
         var port = {{ host_port }};
@@ -61,10 +75,7 @@
             GateOne.prefs.autoConnectURL = ssh_url;
             GateOne.locations;
             GateOne.Net.setLocation(location);
-            if (flag == false) {
-                window.location.href = window.location.href + '&ssh_once=true';
-            }
-            flag = true;
+            window.location.href = changeURLArg(window.location.href,'ssh_once','true')
             <!--记录登录状态-->
 
         });
