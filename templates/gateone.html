@@ -30,7 +30,7 @@
         console.log(ip);
         console.log(user);
         console.log(port);
-        var ssh_url = 'ssh://' + user + '@' + ip + ':' + port;
+        var ssh_url = 'ssh://' + user + '@' + ip + ':' + port+'&ssh_once=true';
         <!--去请求认证信息-->
         var request = $.ajax({
             url: '{% url "getAuthObj" %}',   // api认证方式，
