@@ -52,11 +52,14 @@
 
         });
 
-        var location = user;
-        GateOne.SSH.autoConnect();
-        GateOne.Net.setLocation(location);
-        <!--记录登录状态-->
+        GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal", "GateOne.SSH"], function (window, undefined) {
 
+            var location = user;
+            GateOne.Net.autoConnect();
+            GateOne.Net.setLocation(location);
+            <!--记录登录状态-->
+
+        });
 
 
     });
