@@ -30,7 +30,7 @@
         console.log(ip);
         console.log(user);
         console.log(port);
-        var ssh_url = 'ssh://' + user + '@' + ip + ':' + port+'&ssh_once=true';
+        var ssh_url = 'ssh://' + user + '@' + ip + ':' + port;
         <!--去请求认证信息-->
         var request = $.ajax({
             url: '{% url "getAuthObj" %}',   // api认证方式，
@@ -51,6 +51,8 @@
             });
 
         });
+
+        $.UrlUpdateParams(window.location.href, "ssh_once", 'true');
 
         GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal"], function (window, undefined) {
 
