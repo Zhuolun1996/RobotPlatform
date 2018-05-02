@@ -106,7 +106,7 @@ def createUserRequest(request, serverName):
         newServers.add(serverName)
         _user.profile.serverNum = str(list(newServers))
         _user.save()
-        return redirect('/')
+        return redirect('/robotPage/')
     elif receivingMessage['createcuser']['response'] == 'fail':
         return HttpResponse('失败')
     else:
@@ -133,7 +133,7 @@ def deleteUserRequest(request, serverName):
         newServers.remove(serverName)
         _user.profile.serverNum = str(list(newServers))
         _user.save()
-        return redirect('/')
+        return redirect('/robotPage/')
     elif receivingMessage['deletecuser']['response'] == 'fail':
         return HttpResponse('失败')
     else:
