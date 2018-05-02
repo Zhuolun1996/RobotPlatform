@@ -51,14 +51,12 @@
             });
 
         });
-        GateOne.Base.superSandbox("GateOne.SomePlugin", ["GateOne", "GateOne.Net", "GateOne.Terminal.Input", "GateOne.Terminal", "GateOne.SSH"], function (window, undefined) {
 
-            var location = user;
-            GateOne.SSH.connect(ssh_url);
-            GateOne.Net.setLocation(location);
-            <!--记录登录状态-->
+        var location = user;
+        GateOne.SSH.connect(ssh_url);
+        GateOne.Net.setLocation(location);
+        <!--记录登录状态-->
 
-        });
 
 
     });
