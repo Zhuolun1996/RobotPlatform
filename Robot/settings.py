@@ -133,5 +133,5 @@ STATICFILES_DIRS = (
 )
 
 CRONJOBS = [
-    ('5 * * * *', 'rsm.views.testConnection')
+    ('1 * * * *', 'rsm.views.testConnection')
 ]
