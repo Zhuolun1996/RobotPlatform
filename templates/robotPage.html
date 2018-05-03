@@ -13,17 +13,10 @@
                         <p>IP:{{ item.hostIP }}</p>
                         <p>Port:{{ item.hostPort }}</p>
                         <p>类型:{{ item.category }}</p>
-                        <form class="form-horizontal" role="form" action="/hostConnect/" target="_blank"
-                              method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="host" id="id_host" value="{{ item.hostIP }}">
-                            <input type="hidden" name="port" id="id_port" value="{{ item.hostPort }}">
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">
-                                    登录
-                                </button>
-                            </div>
-                        </form>
+                        <a type="button" class="btn btn-primary" href="/connectContainer/{{ item.hostName }}"
+                           target="_blank">
+                            登录
+                        </a>
                     </div>
                 </div>
             </div>

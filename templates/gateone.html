@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>虚拟机器人连接</title>
+    <script type="text/javascript">
+        function sendDisconnectMessage() {
+            window.open('/disconnectContainer/{{ serverName }}');
+            return "你确定要离开吗";
+        }
+    </script>
 </head>
 <body>
 <!-- gateone.html -->

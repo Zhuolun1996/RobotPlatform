@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1f8858c-ba95-46c6-b7eb-c83032ad5605" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/Robot/urls.py" afterPath="$PROJECT_DIR$/Robot/urls.py" />
       <change beforePath="$PROJECT_DIR$/rsm/views.py" afterPath="$PROJECT_DIR$/rsm/views.py" />
       <change beforePath="$PROJECT_DIR$/templates/gateone.html" afterPath="$PROJECT_DIR$/templates/gateone.html" />
-      <change beforePath="$PROJECT_DIR$/templates/gateoneRobot.html" afterPath="$PROJECT_DIR$/templates/gateoneRobot.html" />
+      <change beforePath="$PROJECT_DIR$/templates/robotPage.html" afterPath="$PROJECT_DIR$/templates/robotPage.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,18 +22,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="gateone.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/gateone.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="60" column="46" lean-forward="true" selection-start-line="57" selection-start-column="12" selection-end-line="60" selection-end-column="46" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="uploadFilePage.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/uploadFilePage.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -43,14 +32,34 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="gateone.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/gateone.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="59" lean-forward="false" selection-start-line="7" selection-start-column="59" selection-end-line="7" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rsm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="256" column="69" lean-forward="false" selection-start-line="256" selection-start-column="69" selection-end-line="256" selection-end-column="69" />
+            <state relative-caret-position="182">
+              <caret line="447" column="38" lean-forward="true" selection-start-line="447" selection-start-column="38" selection-end-line="447" selection-end-column="38" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rsm/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="19" column="99" lean-forward="false" selection-start-line="19" selection-start-column="99" selection-end-line="19" selection-end-column="99" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -68,8 +77,18 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Robot/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="38" column="66" lean-forward="true" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
+            <state relative-caret-position="338">
+              <caret line="40" column="76" lean-forward="false" selection-start-line="40" selection-start-column="57" selection-end-line="40" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gateoneRobot.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/gateoneRobot.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="13" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="10" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -78,48 +97,28 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="35" column="43" lean-forward="false" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="43" />
+            <state relative-caret-position="91">
+              <caret line="36" column="64" lean-forward="true" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gateoneRobot.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/gateoneRobot.html">
+      <file leaf-file-name="manageServers.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/manageServers.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="56" column="15" lean-forward="true" selection-start-line="56" selection-start-column="15" selection-end-line="56" selection-end-column="15" />
+            <state relative-caret-position="113">
+              <caret line="39" column="43" lean-forward="false" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="robotPage.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="robotPage.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/robotPage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="14" column="46" lean-forward="false" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="register.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/register.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="34" column="39" lean-forward="false" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="39" />
+            <state relative-caret-position="85">
+              <caret line="16" column="42" lean-forward="false" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -153,8 +152,8 @@
       <find>col-md-8 col-md-offset-2</find>
       <find>redirect</find>
       <find>50002</find>
-      <find>button</find>
       <find>gateone</find>
+      <find>button</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -180,17 +179,17 @@
         <option value="$PROJECT_DIR$/templates/uploadFilePage.html" />
         <option value="$PROJECT_DIR$/templates/makeControl.html" />
         <option value="$PROJECT_DIR$/rsm/task.py" />
-        <option value="$PROJECT_DIR$/Robot/urls.py" />
         <option value="$PROJECT_DIR$/rsm/tasks.py" />
         <option value="$PROJECT_DIR$/Robot/settings.py" />
         <option value="$PROJECT_DIR$/rsm/models.py" />
         <option value="$PROJECT_DIR$/templates/manageServers.html" />
         <option value="$PROJECT_DIR$/templates/downloadFilePage.html" />
         <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/templates/gateoneRobot.html" />
+        <option value="$PROJECT_DIR$/Robot/urls.py" />
         <option value="$PROJECT_DIR$/templates/robotPage.html" />
         <option value="$PROJECT_DIR$/rsm/views.py" />
         <option value="$PROJECT_DIR$/templates/gateone.html" />
-        <option value="$PROJECT_DIR$/templates/gateoneRobot.html" />
       </list>
     </option>
   </component>
@@ -595,14 +594,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rsm/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="19" column="99" lean-forward="false" selection-start-line="19" selection-start-column="99" selection-end-line="19" selection-end-column="99" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rsm/socketConnect.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -627,14 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/manageServers.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="39" column="43" lean-forward="false" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/modify.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -651,6 +634,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/uploadFilePage.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
@@ -659,26 +650,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/rsm/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="19" column="99" lean-forward="false" selection-start-line="19" selection-start-column="99" selection-end-line="19" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Robot/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="38" column="66" lean-forward="true" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="35" column="43" lean-forward="false" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="338">
+          <caret line="40" column="76" lean-forward="false" selection-start-line="40" selection-start-column="57" selection-end-line="40" selection-end-column="76" />
           <folding />
         </state>
       </provider>
@@ -691,38 +674,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/robotPage.html">
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="14" column="46" lean-forward="false" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+        <state relative-caret-position="91">
+          <caret line="36" column="64" lean-forward="true" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/manageServers.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="39" column="43" lean-forward="false" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rsm/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="256" column="69" lean-forward="false" selection-start-line="256" selection-start-column="69" selection-end-line="256" selection-end-column="69" />
+        <state relative-caret-position="182">
+          <caret line="447" column="38" lean-forward="true" selection-start-line="447" selection-start-column="38" selection-end-line="447" selection-end-column="38" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/gateone.html">
+    <entry file="file://$PROJECT_DIR$/templates/gateoneRobot.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="60" column="46" lean-forward="true" selection-start-line="57" selection-start-column="12" selection-end-line="60" selection-end-column="46" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="150">
+          <caret line="10" column="13" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="10" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/gateoneRobot.html">
+    <entry file="file://$PROJECT_DIR$/templates/gateone.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="56" column="15" lean-forward="true" selection-start-line="56" selection-start-column="15" selection-end-line="56" selection-end-column="15" />
+        <state relative-caret-position="105">
+          <caret line="7" column="59" lean-forward="false" selection-start-line="7" selection-start-column="59" selection-end-line="7" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/robotPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="16" column="42" lean-forward="false" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
           <folding />
         </state>
       </provider>

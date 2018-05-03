@@ -431,3 +431,47 @@ def makeControl(request):
     return render(request, 'makeControl.html',
                   {'profileForm': _profileForm, 'commandForm': _commandForm, 'tempList': tempList,
                    'logStatus': logStatus, 'title': '机器人实验平台 - 远程控制'})
+
+
+@login_required(login_url="/login/")
+def connectContainer(request, serverName):
+    _server = server.objects.get(hostName=serverName)
+    serverPort = _server.hostPort
+    userName = request.user.username
+    data = {'linkcontainer':
+                {'port': int(serverPort),
+                 'username': '%s' % userName}}
+    jsonData = json.dumps(data)
+    try:
+        receivingMessage = sendRequest(containerSock, jsonData)
+    except socket.timeout:
+        return HttpResponse('timeout')
+    if receivingMessage['linkcontainer']['response'] == 'ok':
+        serverIP = _server.hostIP
+        uniqueLabel = hash(time.time())
+        return render(request, 'gateoneRobot.html',
+                      {'host_ip': serverIP, 'host_user': userName, 'host_port': serverPort, 'host_name': serverName
+                       'uniqueLabel': uniqueLabel})
+    elif receivingMessage['linkcontainer']['response'] == 'fail':
+        return HttpResponse(receivingMessage['linkcontainer']['reason'])
+    else:
+        raise Http404
+
+
+@login_required(login_url="/login/")
+def disconnectContainer(request, serverName):
+    _server = server.objects.get(hostName=serverName)
+    serverPort = _server.hostPort
+    userName = request.user.username
+    data = {'unlinkcontainer':
+                {'port': int(serverPort),
+                 'username': '%s' % userName}}
+    jsonData = json.dumps(data)
+    try:
+        receivingMessage = sendRequest(containerSock, jsonData)
+    except socket.timeout:
+        return HttpResponse('timeout')
+    if receivingMessage['unlinkcontainer']['response'] == 'ok':
+        return HttpResponse('unlinked')
+    else:
+        raise Http404
