@@ -450,7 +450,7 @@ def connectContainer(request, serverName):
         serverIP = _server.hostIP
         uniqueLabel = hash(time.time())
         return render(request, 'gateoneRobot.html',
-                      {'host_ip': serverIP, 'host_user': userName, 'host_port': serverPort, 'host_name': serverName
+                      {'host_ip': serverIP, 'host_user': userName, 'host_port': serverPort, 'host_name': serverName,
                        'uniqueLabel': uniqueLabel})
     elif receivingMessage['linkcontainer']['response'] == 'fail':
         return HttpResponse(receivingMessage['linkcontainer']['reason'])
