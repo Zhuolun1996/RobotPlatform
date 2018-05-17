@@ -32,12 +32,14 @@ urlpatterns = [
     path('manageServers/', rsmView.manageServers, name='manageServers'),
     path('connectRobot/', rsmView.connectRobot, name='connectRobot'),
     path('disconnectRobot/<int:_robotNo>', rsmView.disconnectRobot, name='disconnectRobot'),
+    path('RDploadFile/', rsmView.RUploadUserFile, name='RUploadFile'),
+    path('RDownloadFile/', rsmView.RDownloadUserFilePage, name='RDownloadFilePage'),
     path('uploadFile/', rsmView.uploadUserFile, name='uploadFile'),
     path('downloadFile/', rsmView.downloadUserFilePage, name='downloadFilePage'),
     path('downloadFile/<str:filePath>', rsmView.downloadUserFile, name='downloadFile'),
     path('logout/', rsmView.logout, name='logout'),
     path('makeControl/', rsmView.makeControl, name='makeControl'),
-    path('connectContainer/<str:serverName>/',rsmView.connectContainer,name='connectContainer'),
-    path('disconnectContainer/<str:serverName>/',rsmView.disconnectContainer,name='disconnectContainer'),
+    path('connectContainer/<str:serverName>/', rsmView.connectContainer, name='connectContainer'),
+    path('disconnectContainer/<str:serverName>/', rsmView.disconnectContainer, name='disconnectContainer'),
 
 ]
