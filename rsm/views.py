@@ -15,7 +15,7 @@ import os
 
 global containerSock
 global robotSock
-global realRobotDict
+realRobotDict = {}
 
 
 def establishConnection():
