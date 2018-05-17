@@ -560,7 +560,7 @@ def RDownloadUserFilePage(request):
     logStatus = request.user.is_authenticated
     userFiles = uploadFile.objects.filter(belongTo=request.user)
     global realRobotDict
-    tempList = tempList = realRobotDict[request.user.username]
+    tempList = realRobotDict[request.user.username]
     if request.method == 'POST':
         _downloadFile = downloadFileForm(request.POST)
         if _downloadFile.is_valid():

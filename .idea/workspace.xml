@@ -22,11 +22,21 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rsm/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="562" column="62" lean-forward="false" selection-start-line="562" selection-start-column="62" selection-end-line="562" selection-end-column="62" />
+            <state relative-caret-position="93">
+              <caret line="562" column="13" lean-forward="false" selection-start-line="562" selection-start-column="13" selection-end-line="562" selection-end-column="13" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rsm/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -66,16 +76,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="301">
               <caret line="49" column="14" lean-forward="false" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rsm/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -521,13 +521,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rsm/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Robot/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -697,10 +690,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/rsm/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/rsm/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="562" column="62" lean-forward="false" selection-start-line="562" selection-start-column="62" selection-end-line="562" selection-end-column="62" />
+        <state relative-caret-position="93">
+          <caret line="562" column="13" lean-forward="false" selection-start-line="562" selection-start-column="13" selection-end-line="562" selection-end-column="13" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
           </folding>
