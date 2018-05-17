@@ -15,7 +15,7 @@ import os
 
 global containerSock
 global robotSock
-realRobotDict = {}
+global realRobotDict
 
 
 def establishConnection():
@@ -172,6 +172,7 @@ def register(request):
 
 
 def login(request):
+    global realRobotDict
     log_status = request.user.is_authenticated
     if request.method == 'POST':
         form = loginForm(request.POST)
@@ -181,8 +182,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None and user.is_active:
                 auth.login(request, user)
-                global realRobotDict
-                realRobotDict[request.user.username]=[]
+                realRobotDict[request.user.username] = []
                 return redirect('/')
             else:
                 return render(request, 'loginPage.html',
@@ -241,6 +241,7 @@ def manageServers(request):
 
 @login_required(login_url="/login/")
 def connectRobot(request):
+    global realRobotDict
     data = {'linkrobot':
                 {'username': 'stu'}}
     jsonData = json.dumps(data)
@@ -253,7 +254,6 @@ def connectRobot(request):
         robotPort = receivingMessage['linkrobot']['robotport']
         robotNo = receivingMessage['linkrobot']['robotno']
         uniqueLabel = hash(time.time())
-        global realRobotDict
         realRobotDict[request.user.username].append(robotNo)
         print(robotIP, robotPort, robotNo)
         return render(request, 'gateoneRobot.html',
@@ -549,6 +549,7 @@ def RUploadUserFile(request):
 @login_required(login_url="/login/")
 def RDownloadUserFilePage(request):
     global realRobotDict
+
     def getFilePath(filePath):
         tempFileName = filePath.replace('/', '+')
         tempFileName = tempFileName.replace(' ', '=')
