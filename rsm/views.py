@@ -181,8 +181,6 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None and user.is_active:
                 auth.login(request, user)
-                global realRobotDict
-                realRobotDict[request.user.username] = []
                 return redirect('/')
             else:
                 return render(request, 'loginPage.html',
@@ -194,8 +192,6 @@ def login(request):
 
 @login_required(login_url="/login/")
 def logout(request):
-    global realRobotDict
-    realRobotDict[request.user.username] = []
     auth.logout(request)
     return redirect('/')
 
@@ -256,6 +252,7 @@ def connectRobot(request):
         robotNo = receivingMessage['linkrobot']['robotno']
         uniqueLabel = hash(time.time())
         global realRobotDict
+        realRobotDict.setdefault(request.user.username, [])
         realRobotDict[request.user.username].append(robotNo)
         print(robotIP, robotPort, robotNo)
         return render(request, 'gateoneRobot.html',
@@ -519,7 +516,7 @@ def disconnectContainer(request, serverName):
 def RUploadUserFile(request):
     logStatus = request.user.is_authenticated
     global realRobotDict
-    tempList = realRobotDict[request.user.username]
+    tempList = realRobotDict.setdefault(request.user.username, [])
     if request.method == 'POST':
         _uploadFile = uploadFileForm(request.POST, request.FILES)
         if _uploadFile.is_valid():
@@ -563,7 +560,7 @@ def RDownloadUserFilePage(request):
     logStatus = request.user.is_authenticated
     userFiles = uploadFile.objects.filter(belongTo=request.user)
     global realRobotDict
-    tempList = realRobotDict[request.user.username]
+    tempList = realRobotDict.setdefault(request.user.username, [])
     if request.method == 'POST':
         _downloadFile = downloadFileForm(request.POST)
         if _downloadFile.is_valid():
