@@ -19,9 +19,9 @@ global realRobotDict
 
 
 def establishConnection():
-    global containerSock
-    global robotSock
     try:
+        global containerSock
+        global robotSock
         containerSock = establishContainerConnect(CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_PORT)
         robotSock = establishRobotConnect(ROBOT_TARGET_SERVER_IP, ROBOT_TARGET_SERVER_PORT)
     except:
@@ -172,7 +172,6 @@ def register(request):
 
 
 def login(request):
-    global realRobotDict
     log_status = request.user.is_authenticated
     if request.method == 'POST':
         form = loginForm(request.POST)
@@ -182,6 +181,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None and user.is_active:
                 auth.login(request, user)
+                global realRobotDict
                 realRobotDict[request.user.username] = []
                 return redirect('/')
             else:
@@ -241,7 +241,6 @@ def manageServers(request):
 
 @login_required(login_url="/login/")
 def connectRobot(request):
-    global realRobotDict
     data = {'linkrobot':
                 {'username': 'stu'}}
     jsonData = json.dumps(data)
@@ -254,6 +253,7 @@ def connectRobot(request):
         robotPort = receivingMessage['linkrobot']['robotport']
         robotNo = receivingMessage['linkrobot']['robotno']
         uniqueLabel = hash(time.time())
+        global realRobotDict
         realRobotDict[request.user.username].append(robotNo)
         print(robotIP, robotPort, robotNo)
         return render(request, 'gateoneRobot.html',
@@ -513,8 +513,8 @@ def disconnectContainer(request, serverName):
 
 @login_required(login_url="/login/")
 def RUploadUserFile(request):
-    global realRobotDict
     logStatus = request.user.is_authenticated
+    global realRobotDict
     tempList = realRobotDict[request.user.username]
     if request.method == 'POST':
         _uploadFile = uploadFileForm(request.POST, request.FILES)
@@ -548,8 +548,6 @@ def RUploadUserFile(request):
 
 @login_required(login_url="/login/")
 def RDownloadUserFilePage(request):
-    global realRobotDict
-
     def getFilePath(filePath):
         tempFileName = filePath.replace('/', '+')
         tempFileName = tempFileName.replace(' ', '=')
@@ -560,6 +558,7 @@ def RDownloadUserFilePage(request):
 
     logStatus = request.user.is_authenticated
     userFiles = uploadFile.objects.filter(belongTo=request.user)
+    global realRobotDict
     tempList = realRobotDict[request.user.username]
     if request.method == 'POST':
         _downloadFile = downloadFileForm(request.POST)
