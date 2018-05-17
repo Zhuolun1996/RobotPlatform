@@ -516,7 +516,7 @@ def disconnectContainer(request, serverName):
 def RUploadUserFile(request):
     logStatus = request.user.is_authenticated
     global realRobotDict
-    tempList = realRobotDict.setdefault(request.user.username, [])
+    tempList = realRobotDict[request.user.username]
     if request.method == 'POST':
         _uploadFile = uploadFileForm(request.POST, request.FILES)
         if _uploadFile.is_valid():
@@ -560,7 +560,7 @@ def RDownloadUserFilePage(request):
     logStatus = request.user.is_authenticated
     userFiles = uploadFile.objects.filter(belongTo=request.user)
     global realRobotDict
-    tempList = realRobotDict.setdefault(request.user.username, [])
+    tempList = tempList = realRobotDict[request.user.username]
     if request.method == 'POST':
         _downloadFile = downloadFileForm(request.POST)
         if _downloadFile.is_valid():
