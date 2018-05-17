@@ -16,6 +16,7 @@ import os
 global containerSock
 global robotSock
 global beatNo
+global realRobotDict
 
 
 def establishConnection():
@@ -181,6 +182,8 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None and user.is_active:
                 auth.login(request, user)
+                global realRobotDict
+                realRobotDict[request.user.username]=[]
                 return redirect('/')
             else:
                 return render(request, 'loginPage.html',
@@ -251,6 +254,8 @@ def connectRobot(request):
         robotPort = receivingMessage['linkrobot']['robotport']
         robotNo = receivingMessage['linkrobot']['robotno']
         uniqueLabel = hash(time.time())
+        global realRobotDict
+        realRobotDict[request.user.username].append(robotNo)
         print(robotIP, robotPort, robotNo)
         return render(request, 'gateoneRobot.html',
                       {'host_ip': ROBOT_TARGET_SERVER_IP, 'host_user': 'stu', 'host_port': robotPort,
@@ -315,7 +320,7 @@ def uploadUserFile(request):
         _uploadFile = uploadFileForm()
     return render(request, 'uploadFilePage.html',
                   {'uploadFileForm': _uploadFile, 'logStatus': logStatus, 'tempList': tempList,
-                   'title': '机器人实验平台 - 上传文件'})
+                   'title': '机器人实验平台 - 虚拟机器人文件上传'})
 
 
 @login_required(login_url="/login/")
@@ -359,7 +364,7 @@ def downloadUserFilePage(request):
                 # userFile.targetContainer = _targetContainer
                 # userFile.save()
                 # return HttpResponse('success')
-                return redirect('/downloadFile/'+getFilePath(_file))
+                return redirect('/downloadFile/' + getFilePath(_file))
             elif receivingMessage['cdownload']['response'] == 'fail':
                 return HttpResponse('fail')
             else:
@@ -368,7 +373,7 @@ def downloadUserFilePage(request):
         _downloadFile = downloadFileForm()
     return render(request, 'downloadFilePage.html',
                   {'downloadFileForm': _downloadFile, 'tempList': tempList, 'userFiles': userFiles,
-                   'logStatus': logStatus, 'title': '机器人实验平台 - 下载文件'})
+                   'logStatus': logStatus, 'title': '机器人实验平台 - 虚拟机器人文件下载'})
 
 
 @login_required(login_url="/login/")
@@ -505,3 +510,88 @@ def disconnectContainer(request, serverName):
         return HttpResponse('unlinked')
     else:
         raise Http404
+
+
+@login_required(login_url="/login/")
+def RUploadUserFile(request):
+    global realRobotDict
+    logStatus = request.user.is_authenticated
+    tempList = realRobotDict[request.user.username]
+    if request.method == 'POST':
+        _uploadFile = uploadFileForm(request.POST, request.FILES)
+        if _uploadFile.is_valid():
+            _file = request.FILES.get('uploadFile')
+            _targetContainer = request.POST.get('targetContainer')
+            userFile = uploadFile(belongTo=request.user, file=_file, targetContainer=_targetContainer)
+            userFile.save()
+
+            data = {'rupload':
+                        {'robotno': int(_targetContainer),
+                         'username': request.user.username,
+                         'filename': userFile.getFileName()}}
+            jsonData = json.dumps(data)
+            try:
+                receivingMessage = sendRequest(containerSock, jsonData)
+            except socket.timeout:
+                return HttpResponse('timeout')
+            if receivingMessage['rupload']['response'] == 'ok':
+                return HttpResponse('success')
+            elif receivingMessage['rupload']['response'] == 'failed':
+                return HttpResponse('fail')
+            else:
+                return HttpResponse(receivingMessage)
+    else:
+        _uploadFile = uploadFileForm()
+    return render(request, 'uploadFilePage.html',
+                  {'uploadFileForm': _uploadFile, 'logStatus': logStatus, 'tempList': tempList,
+                   'title': '机器人实验平台 - 实体机器人文件上传'})
+
+
+@login_required(login_url="/login/")
+def RDownloadUserFilePage(request):
+    global realRobotDict
+    def getFilePath(filePath):
+        tempFileName = filePath.replace('/', '+')
+        tempFileName = tempFileName.replace(' ', '=')
+        return tempFileName
+
+    def getFileName(filePath):
+        return filePath.split('/')[-1]
+
+    logStatus = request.user.is_authenticated
+    userFiles = uploadFile.objects.filter(belongTo=request.user)
+    tempList = realRobotDict[request.user.username]
+    if request.method == 'POST':
+        _downloadFile = downloadFileForm(request.POST)
+        if _downloadFile.is_valid():
+            _filename = request.POST.get('filename')
+            _targetContainer = request.POST.get('targetContainer')
+
+            data = {'rdownload':
+                        {'robotno': int(_targetContainer),
+                         'username': request.user.username,
+                         'filename': _filename}}
+            jsonData = json.dumps(data)
+            try:
+                receivingMessage = sendRequest(containerSock, jsonData)
+            except socket.timeout:
+                return HttpResponse('timeout')
+            if receivingMessage['rdownload']['response'] == 'ok':
+                _file = os.path.join(MEDIA_ROOT, 'files', request.user.username, _filename)
+                # _targetContainer = request.POST.get('targetContainer')
+                # userFile = uploadFile()
+                # userFile.belongTo = request.user
+                # userFile.file.name = _file
+                # userFile.targetContainer = _targetContainer
+                # userFile.save()
+                # return HttpResponse('success')
+                return redirect('/downloadFile/' + getFilePath(_file))
+            elif receivingMessage['rdownload']['response'] == 'fail':
+                return HttpResponse('fail')
+            else:
+                return HttpResponse(receivingMessage)
+    else:
+        _downloadFile = downloadFileForm()
+    return render(request, 'downloadFilePage.html',
+                  {'downloadFileForm': _downloadFile, 'tempList': tempList, 'userFiles': userFiles,
+                   'logStatus': logStatus, 'title': '机器人实验平台 - 实体机器人文件下载'})
