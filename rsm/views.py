@@ -194,6 +194,8 @@ def login(request):
 
 @login_required(login_url="/login/")
 def logout(request):
+    global realRobotDict
+    realRobotDict[request.user.username] = []
     auth.logout(request)
     return redirect('/')
 
@@ -276,6 +278,8 @@ def disconnectRobot(request, _robotNo):
         return HttpResponse('timeout')
     if receivingMessage['unlinkrobot']['response'] == 'ok':
         robotNo = receivingMessage['unlinkrobot']['robotno']
+        global realRobotDict
+        realRobotDict[request.user.username].remove(robotNo)
         print(robotNo)
         return HttpResponse('released robot')
     elif receivingMessage['unlinkrobot']['response'] == 'fail':
@@ -541,7 +545,7 @@ def RUploadUserFile(request):
                 return HttpResponse(receivingMessage)
     else:
         _uploadFile = uploadFileForm()
-    return render(request, 'uploadFilePage.html',
+    return render(request, 'RUploadFilePage.html',
                   {'uploadFileForm': _uploadFile, 'logStatus': logStatus, 'tempList': tempList,
                    'title': '机器人实验平台 - 实体机器人文件上传'})
 
@@ -591,6 +595,6 @@ def RDownloadUserFilePage(request):
                 return HttpResponse(receivingMessage)
     else:
         _downloadFile = downloadFileForm()
-    return render(request, 'downloadFilePage.html',
+    return render(request, 'RDownloadFilePage.html',
                   {'downloadFileForm': _downloadFile, 'tempList': tempList, 'userFiles': userFiles,
                    'logStatus': logStatus, 'title': '机器人实验平台 - 实体机器人文件下载'})
