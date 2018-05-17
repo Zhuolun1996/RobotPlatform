@@ -26,6 +26,3 @@ def sendRequest(sock,message):
     receivingMessage = json.loads(receivingMessage.decode('utf-8'))
     print(receivingMessage)
     return receivingMessage
-
-
-

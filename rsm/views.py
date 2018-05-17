@@ -320,6 +320,14 @@ def uploadUserFile(request):
 
 @login_required(login_url="/login/")
 def downloadUserFilePage(request):
+    def getFilePath(filePath):
+        tempFileName = filePath.replace('/', '+')
+        tempFileName = tempFileName.replace(' ', '=')
+        return tempFileName
+
+    def getFileName(filePath):
+        return filePath.split('/')[-1]
+
     logStatus = request.user.is_authenticated
     userFiles = uploadFile.objects.filter(belongTo=request.user)
     usingServers = literal_eval(request.user.profile.serverNum)
@@ -344,13 +352,14 @@ def downloadUserFilePage(request):
                 return HttpResponse('timeout')
             if receivingMessage['cdownload']['response'] == 'ok':
                 _file = os.path.join(MEDIA_ROOT, 'files', request.user.username, _filename)
-                _targetContainer = request.POST.get('targetContainer')
-                userFile = uploadFile()
-                userFile.belongTo = request.user
-                userFile.file.name = _file
-                userFile.targetContainer = _targetContainer
-                userFile.save()
-                return HttpResponse('success')
+                # _targetContainer = request.POST.get('targetContainer')
+                # userFile = uploadFile()
+                # userFile.belongTo = request.user
+                # userFile.file.name = _file
+                # userFile.targetContainer = _targetContainer
+                # userFile.save()
+                # return HttpResponse('success')
+                return redirect('/downloadFile/'+getFilePath(_file))
             elif receivingMessage['cdownload']['response'] == 'fail':
                 return HttpResponse('fail')
             else:
@@ -392,6 +401,27 @@ def connectVNC(request, serverName):
         return redirect('http://222.200.177.38:8080/vnc_lite.html?host=222.200.177.38&port=%s' % serverPort)
     elif receivingMessage['ccontrol']['response'] == 'failed':
         return HttpResponse('失败')
+    else:
+        raise Http404
+
+    data = {'linkrobot':
+                {'username': 'stu'}}
+    jsonData = json.dumps(data)
+    try:
+        receivingMessage = sendRequest(robotSock, jsonData)
+    except socket.timeout:
+        return HttpResponse('timeout')
+    if receivingMessage['linkrobot']['response'] == 'ok':
+        robotIP = receivingMessage['linkrobot']['robotip']
+        robotPort = receivingMessage['linkrobot']['robotport']
+        robotNo = receivingMessage['linkrobot']['robotno']
+        uniqueLabel = hash(time.time())
+        print(robotIP, robotPort, robotNo)
+        return render(request, 'gateoneRobot.html',
+                      {'host_ip': ROBOT_TARGET_SERVER_IP, 'host_user': 'stu', 'host_port': robotPort,
+                       'robotNo': robotNo, 'uniqueLabel': uniqueLabel})
+    elif receivingMessage['linkrobot']['response'] == 'fail':
+        return HttpResponse(receivingMessage['linkrobot']['reason'])
     else:
         raise Http404
 
