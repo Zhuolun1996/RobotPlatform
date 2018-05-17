@@ -534,7 +534,7 @@ def RUploadUserFile(request):
                          'filename': userFile.getFileName()}}
             jsonData = json.dumps(data)
             try:
-                receivingMessage = sendRequest(containerSock, jsonData)
+                receivingMessage = sendRequest(robotSock, jsonData)
             except socket.timeout:
                 return HttpResponse('timeout')
             if receivingMessage['rupload']['response'] == 'ok':
@@ -576,7 +576,7 @@ def RDownloadUserFilePage(request):
                          'filename': _filename}}
             jsonData = json.dumps(data)
             try:
-                receivingMessage = sendRequest(containerSock, jsonData)
+                receivingMessage = sendRequest(robotSock, jsonData)
             except socket.timeout:
                 return HttpResponse('timeout')
             if receivingMessage['rdownload']['response'] == 'ok':
