@@ -15,8 +15,7 @@ import os
 
 global containerSock
 global robotSock
-global beatNo
-global realRobotDict
+realRobotDict = {}
 
 
 def establishConnection():
@@ -183,7 +182,7 @@ def login(request):
             if user is not None and user.is_active:
                 auth.login(request, user)
                 global realRobotDict
-                realRobotDict[request.user.username]=[]
+                realRobotDict[request.user.username] = []
                 return redirect('/')
             else:
                 return render(request, 'loginPage.html',
@@ -514,7 +513,6 @@ def disconnectContainer(request, serverName):
 
 @login_required(login_url="/login/")
 def RUploadUserFile(request):
-    global realRobotDict
     logStatus = request.user.is_authenticated
     tempList = realRobotDict[request.user.username]
     if request.method == 'POST':
@@ -549,7 +547,6 @@ def RUploadUserFile(request):
 
 @login_required(login_url="/login/")
 def RDownloadUserFilePage(request):
-    global realRobotDict
     def getFilePath(filePath):
         tempFileName = filePath.replace('/', '+')
         tempFileName = tempFileName.replace(' ', '=')
