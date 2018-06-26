@@ -304,6 +304,7 @@ def uploadUserFile(request):
             containerPort = server.objects.get(hostName=_targetContainer).hostPort
             data = {'cupload':
                         {'port': int(containerPort),
+                         'image': 'containerName',
                          'username': request.user.username,
                          'filename': userFile.getFileName()}}
             jsonData = json.dumps(data)
@@ -349,6 +350,7 @@ def downloadUserFilePage(request):
 
             data = {'cdownload':
                         {'port': int(containerPort),
+                         'image': 'containerName',
                          'username': request.user.username,
                          'filename': _filename}}
             jsonData = json.dumps(data)
@@ -447,6 +449,7 @@ def makeControl(request):
             containerPort = server.objects.get(hostName=_serverNum[0]).hostPort
             data = {'ccontrol':
                         {'port': int(containerPort),
+                         'image': 'containerName',
                          'username': request.user.username,
                          'command': _command}}
             jsonData = json.dumps(data)
