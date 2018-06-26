@@ -41,5 +41,7 @@ urlpatterns = [
     path('makeControl/', rsmView.makeControl, name='makeControl'),
     path('connectContainer/<str:serverName>/', rsmView.connectContainer, name='connectContainer'),
     path('disconnectContainer/<str:serverName>/', rsmView.disconnectContainer, name='disconnectContainer'),
+    path('connectVNC/<str:serverName>/', rsmView.connectVNC, name='connectVNC'),
+    path('disconnectVNC/<str:serverName>/', rsmView.disconnectVNC, name='disconnectVNC'),
 
 ]

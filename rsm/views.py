@@ -16,6 +16,7 @@ import os
 global containerSock
 global robotSock
 realRobotDict = {}
+VNCCOntainerDict = {}
 
 
 def establishConnection():
@@ -390,43 +391,42 @@ def downloadUserFile(request, filePath):
 
 @login_required(login_url="/login/")
 def connectVNC(request, serverName):
-    _server = server.objects.get(hostName=serverName)
-    serverPort = _server.hostPort
     userName = request.user.username
-    data = {'ccontrol':
-                {'port': int(serverPort),
-                 'username': '%s' % userName,
-                 'command': 'cmd'}}
+    data = {'linkcontainer':
+                {'image': serverName,
+                 'username': '%s' % userName}}
+    jsonData = json.dumps(data)
+    try:
+        receivingMessage = sendRequest(containerSock, jsonData)
+        global VNCCOntainerDict
+        VNCCOntainerDict.setdefault(serverName, receivingMessage['port'])
+    except socket.timeout:
+        return HttpResponse('timeout')
+    if receivingMessage['ccontrol']['response'] == 'ok':
+        return redirect(
+            'http://222.200.177.38:8080/vnc_lite.html?host=222.200.177.38&port=%s' % receivingMessage['port'])
+    elif receivingMessage['ccontrol']['response'] == 'fail':
+        return HttpResponse('失败')
+    else:
+        raise Http404
+
+
+@login_required(login_url="/login/")
+def disconnectVNC(request, serverName):
+    userName = request.user.username
+    data = {'unlinkcontainer':
+                {'image': serverName,
+                 'port': VNCCOntainerDict['serverName'],
+                 'username': '%s' % userName}}
     jsonData = json.dumps(data)
     try:
         receivingMessage = sendRequest(containerSock, jsonData)
     except socket.timeout:
         return HttpResponse('timeout')
     if receivingMessage['ccontrol']['response'] == 'ok':
-        return redirect('http://222.200.177.38:8080/vnc_lite.html?host=222.200.177.38&port=%s' % serverPort)
+        return HttpResponse('success')
     elif receivingMessage['ccontrol']['response'] == 'failed':
         return HttpResponse('失败')
-    else:
-        raise Http404
-
-    data = {'linkrobot':
-                {'username': 'stu'}}
-    jsonData = json.dumps(data)
-    try:
-        receivingMessage = sendRequest(robotSock, jsonData)
-    except socket.timeout:
-        return HttpResponse('timeout')
-    if receivingMessage['linkrobot']['response'] == 'ok':
-        robotIP = receivingMessage['linkrobot']['robotip']
-        robotPort = receivingMessage['linkrobot']['robotport']
-        robotNo = receivingMessage['linkrobot']['robotno']
-        uniqueLabel = hash(time.time())
-        print(robotIP, robotPort, robotNo)
-        return render(request, 'gateoneRobot.html',
-                      {'host_ip': ROBOT_TARGET_SERVER_IP, 'host_user': 'stu', 'host_port': robotPort,
-                       'robotNo': robotNo, 'uniqueLabel': uniqueLabel})
-    elif receivingMessage['linkrobot']['response'] == 'fail':
-        return HttpResponse(receivingMessage['linkrobot']['reason'])
     else:
         raise Http404
 
@@ -474,7 +474,8 @@ def connectContainer(request, serverName):
     serverPort = _server.hostPort
     userName = request.user.username
     data = {'linkcontainer':
-                {'port': int(serverPort),
+                {'image': serverName,
+                 'port': int(serverPort),
                  'username': '%s' % userName}}
     jsonData = json.dumps(data)
     try:
@@ -499,7 +500,8 @@ def disconnectContainer(request, serverName):
     serverPort = _server.hostPort
     userName = request.user.username
     data = {'unlinkcontainer':
-                {'port': int(serverPort),
+                {'image': serverName,
+                 'port': int(serverPort),
                  'username': '%s' % userName}}
     jsonData = json.dumps(data)
     try:
