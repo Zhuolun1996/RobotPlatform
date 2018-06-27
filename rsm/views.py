@@ -13,12 +13,22 @@ from Robot.settings import CONTAINER_TARGET_SERVER_IP, CONTAINER_TARGET_SERVER_P
 from django.http import FileResponse
 import os
 
+# 该文件用于定义后台使用方法
+
+# 全局变量，用于保存TCP连接对象
+
+# 容器消息接收器TCP连接
 global containerSock
+# 实体机器人消息接收器TCP连接
 global robotSock
+
+# 全局变量，用于保存实体机器人ID和用户使用的关系对
 realRobotDict = {}
+# 全局变量，用于保存VNC连接容器和端口的关系对
 VNCCOntainerDict = {}
 
 
+# 建立TCP连接方法
 def establishConnection():
     try:
         global containerSock
@@ -29,6 +39,7 @@ def establishConnection():
         pass
 
 
+# 测试连接方法
 def testConnection():
     data = {'heartbeat': 'no'}
     jsonData = json.dumps(data)
@@ -40,11 +51,13 @@ def testConnection():
         establishConnection()
 
 
+# 建立连接
 establishConnection()
+# 测试连接
 testConnection()
 
 
-# Create your views here.
+# 创建SSH连接
 def hostConnect(request):
     host_ip = request.POST.get('host', None)
     host_user = request.user.username
@@ -57,8 +70,7 @@ def hostConnect(request):
                   {'host_ip': host_ip, 'host_user': host_user, 'host_port': host_port, 'uniqueLabel': uniqueLabel})
 
 
-# 获取get请求的信息，然后返回gateone的页面
-
+# SSH连接相关——创建签名
 def createSignature(secret, *parts):
     hash = hmac.new(secret, digestmod=hashlib.sha1)
     for part in parts:
@@ -66,6 +78,7 @@ def createSignature(secret, *parts):
     return hash.hexdigest()
 
 
+# 建立SSH连接相关——验证连接合法性
 def getAuthObj(request):
     # 安装gateone的服务器以及端口.
     gateone_server = GateOneServer
@@ -89,6 +102,7 @@ def getAuthObj(request):
     return HttpResponse(valid_json_auth_info)
 
 
+# 虚拟机器人创建用户
 def createUserRequest(request, serverName):
     _server = server.objects.get(hostName=serverName)
     serverPort = _server.hostPort
@@ -116,6 +130,7 @@ def createUserRequest(request, serverName):
         raise Http404
 
 
+# 虚拟机器人删除用户
 def deleteUserRequest(request, serverName):
     _server = server.objects.get(hostName=serverName)
     serverPort = _server.hostPort
@@ -143,12 +158,14 @@ def deleteUserRequest(request, serverName):
         raise Http404
 
 
+# 首页
 def mainPage(request):
     if request.user.is_authenticated == True:
         return render(request, 'index.html', {'logStatus': request.user.is_authenticated, 'title': '机器人实验平台'})
     return render(request, 'loginPage.html', {'logStatus': request.user.is_authenticated, 'title': '机器人实验平台 - 登录'})
 
 
+# 注册
 def register(request):
     logStatus = request.user.is_authenticated
     serverNums = server.objects.all()
@@ -172,6 +189,7 @@ def register(request):
                    'serverNums': serverNums, 'title': '机器人实验平台 - 注册'})
 
 
+# 登录
 def login(request):
     log_status = request.user.is_authenticated
     if request.method == 'POST':
@@ -191,12 +209,14 @@ def login(request):
         return render(request, 'loginPage.html', {'form': form, 'logStatus': log_status, 'title': '机器人实验平台 - 登录'})
 
 
+# 登出
 @login_required(login_url="/login/")
 def logout(request):
     auth.logout(request)
     return redirect('/')
 
 
+# 修改用户使用的服务器（测试用方法，正式不使用）
 @login_required(login_url="/login/")
 def manageAccountServers(request):
     logStatus = request.user.is_authenticated
@@ -216,6 +236,7 @@ def manageAccountServers(request):
                    'serverNums': serverNums})
 
 
+# 连接虚拟机器人主页
 @login_required(login_url="/login/")
 def robotPage(request):
     logStatus = request.user.is_authenticated
@@ -227,6 +248,7 @@ def robotPage(request):
     return render(request, 'robotPage.html', {'hosts': tempList, 'logStatus': logStatus, 'title': '机器人实验平台 - 连接虚拟机器人'})
 
 
+# 用户管理虚拟机器人主页
 @login_required(login_url="/login/")
 def manageServers(request):
     logStatus = request.user.is_authenticated
@@ -238,6 +260,7 @@ def manageServers(request):
                    'title': '机器人实验平台 - 用户设置'})
 
 
+# 连接实体机器人
 @login_required(login_url="/login/")
 def connectRobot(request):
     data = {'linkrobot':
@@ -265,6 +288,7 @@ def connectRobot(request):
         raise Http404
 
 
+# 断开实体机器人连接
 @login_required(login_url="/login/")
 def disconnectRobot(request, _robotNo):
     data = {'unlinkrobot':
@@ -286,6 +310,7 @@ def disconnectRobot(request, _robotNo):
         raise Http404
 
 
+# 虚拟机器人上传文件
 @login_required(login_url="/login/")
 def uploadUserFile(request):
     logStatus = request.user.is_authenticated
@@ -325,6 +350,7 @@ def uploadUserFile(request):
                    'title': '机器人实验平台 - 虚拟机器人文件上传'})
 
 
+# 虚拟机器人下载文件
 @login_required(login_url="/login/")
 def downloadUserFilePage(request):
     def getFilePath(filePath):
@@ -360,6 +386,8 @@ def downloadUserFilePage(request):
                 return HttpResponse('timeout')
             if receivingMessage['cdownload']['response'] == 'ok':
                 _file = os.path.join(MEDIA_ROOT, 'files', request.user.username, _filename)
+
+                # 只保存文件到数据库，不下载
                 # _targetContainer = request.POST.get('targetContainer')
                 # userFile = uploadFile()
                 # userFile.belongTo = request.user
@@ -367,6 +395,8 @@ def downloadUserFilePage(request):
                 # userFile.targetContainer = _targetContainer
                 # userFile.save()
                 # return HttpResponse('success')
+
+                # 直接下载文件
                 return redirect('/downloadFile/' + getFilePath(_file))
             elif receivingMessage['cdownload']['response'] == 'fail':
                 return HttpResponse('fail')
@@ -379,6 +409,7 @@ def downloadUserFilePage(request):
                    'logStatus': logStatus, 'title': '机器人实验平台 - 虚拟机器人文件下载'})
 
 
+# 文件下载
 @login_required(login_url="/login/")
 def downloadUserFile(request, filePath):
     realFilePath = filePath.replace('+', '/')
@@ -391,6 +422,7 @@ def downloadUserFile(request, filePath):
     return response
 
 
+# 连接仿真终端
 @login_required(login_url="/login/")
 def connectVNC(request, serverName):
     userName = request.user.username
@@ -413,6 +445,7 @@ def connectVNC(request, serverName):
         raise Http404
 
 
+# 断开仿真终端连接
 @login_required(login_url="/login/")
 def disconnectVNC(request, serverName):
     userName = request.user.username
@@ -433,6 +466,7 @@ def disconnectVNC(request, serverName):
         raise Http404
 
 
+# 批量控制
 @login_required(login_url="/login/")
 def makeControl(request):
     logStatus = request.user.is_authenticated
@@ -471,6 +505,7 @@ def makeControl(request):
                    'logStatus': logStatus, 'title': '机器人实验平台 - 远程控制'})
 
 
+# 连接虚拟机器人
 @login_required(login_url="/login/")
 def connectContainer(request, serverName):
     _server = server.objects.get(hostName=serverName)
@@ -497,6 +532,7 @@ def connectContainer(request, serverName):
         raise Http404
 
 
+# 断开虚拟机器人连接
 @login_required(login_url="/login/")
 def disconnectContainer(request, serverName):
     _server = server.objects.get(hostName=serverName)
@@ -517,6 +553,7 @@ def disconnectContainer(request, serverName):
         raise Http404
 
 
+# 实体机器人上传文件
 @login_required(login_url="/login/")
 def RUploadUserFile(request):
     logStatus = request.user.is_authenticated
@@ -552,6 +589,7 @@ def RUploadUserFile(request):
                    'title': '机器人实验平台 - 实体机器人文件上传'})
 
 
+# 实体机器人下载文件
 @login_required(login_url="/login/")
 def RDownloadUserFilePage(request):
     def getFilePath(filePath):

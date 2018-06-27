@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rsm.apps.RsmConfig',
+    # bootstrap3 前端框架
     'bootstrap3',
+    # django_crontab 计划任务-用于定时检测TCP连接
     'django_crontab',
 ]
 
@@ -115,23 +117,29 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+# 静态文件根目录
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CONTAINER_TARGET_SERVER_IP='222.200.177.38'
-CONTAINER_TARGET_SERVER_PORT=48000
-ROBOT_TARGET_SERVER_IP='222.200.177.38'
-ROBOT_TARGET_SERVER_PORT=48001
-GateOneServer='https://222.200.177.38:48080'
+# 设定部署机器人的服务器IP地址和TCP连接监听端口——用于建立TCP连接
+CONTAINER_TARGET_SERVER_IP = '222.200.177.38'
+CONTAINER_TARGET_SERVER_PORT = 48000
+ROBOT_TARGET_SERVER_IP = '222.200.177.38'
+ROBOT_TARGET_SERVER_PORT = 48001
 
+# GateOne服务器地址
+GateOneServer = 'https://222.200.177.38:48080'
+
+# 静态文件夹
 STATICFILES_DIRS = (
     ('css', os.path.join(STATIC_ROOT, 'css')),
     ('js', os.path.join(STATIC_ROOT, 'js')),
 
 )
 
+# 计划任务，测试连接稳定
 CRONJOBS = [
     ('1 * * * *', 'rsm.views.testConnection')
 ]
